@@ -66,7 +66,9 @@ public class Main {
 				}
 			}
 			
-			codiceFiscale = codiceCognome.toString();
+			codiceFiscale = codiceCognome.
+			//ciao
+			System.out.println(codiceFiscale);
 			
 			if(nome.length() < 3) {
 				for(int j = 0; j < nome.length(); j++) {
@@ -81,6 +83,7 @@ public class Main {
 						numCons++;
 					}
 				}
+				
 				if(numCons > 3) {
 					int k = 0;
 					int z = 0;
@@ -97,19 +100,32 @@ public class Main {
 						}
 					}
 				}
+				
+				else if(numCons == 3) {
+					int k = 0;
+					
+					for(int j = 0; j < nome.length(); j++) {
+						if(k < 3) {
+							if((nome.charAt(j) != '\u0041') && (nome.charAt(j) != '\u0045') && (nome.charAt(j) != '\u0049') && (nome.charAt(j) != '\u004F') && (nome.charAt(j) != '\u0055')) {
+								codiceNome[k] = nome.charAt(j);
+								k++;
+							}
+						}
+					}
+				}
+				
 				else if(numCons < 3) {
 					int z = numCons;
 					int k = 0;
 					
-					for(int j = 0; j < cognome.length(); j++) {
-						if((cognome.charAt(j) != '\u0041') && (cognome.charAt(j) != '\u0045') && (cognome.charAt(j) != '\u0049') && (cognome.charAt(j) != '\u004F') && (cognome.charAt(j) != '\u0055')) {
-							codiceCognome[k] = cognome.charAt(j);
-							
+					for(int j = 0; j < nome.length(); j++) {
+						if((nome.charAt(j) != '\u0041') && (nome.charAt(j) != '\u0045') && (nome.charAt(j) != '\u0049') && (nome.charAt(j) != '\u004F') && (nome.charAt(j) != '\u0055')) {
+							codiceNome[k] = nome.charAt(j);
 							k++;
 						}
 						else{
 							if(z < 3) {
-								codiceCognome[z] = cognome.charAt(j);
+								codiceNome[z] = nome.charAt(j);
 								z++;
 							}
 						}
@@ -117,7 +133,8 @@ public class Main {
 				
 				}
 			}
-			
+			/*codiceFiscale = codiceFiscale + codiceNome.toString();
+			System.out.println(codiceFiscale);*/
 		}
 		
 	}
