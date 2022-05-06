@@ -1,0 +1,61 @@
+COMANDI GIT E GITHUB
+
+//inizzializzare git:
+-git init (crea dirctory di git e un branch principale) ---->inizzializzazione repository per una direcotry remota 
+-git add nomefile (aggiungo file alla standing area) --->aggiungere le modifiche di un file 
+-git add . (aggiungo tutti i file della directory) --->aggiungere le modifiche di più file 
+-git commit -m "testo" (creo snapshot nel branch master  --->validare le modifiche 
+-git status ( verifico cosa è presente nella stending area)
+-git log (mosra commit precedenti) 
+
+//creare cartelle e file:
+-mkdiv repository (creao una cartella)
+-cd reposotry (entro nella cartella) 
+-touch file 
+-echo > file (inserisco file nella cartella 
+
+//cancellare file:
+-git rm -r --cached nomefile (rimuovo una cartella dalla standing area, poi committo)
+ git reset --hard origin/master (elimino tutti i cambiamenti e i commits in locale e sposto il main branch all'ultima versione remota) 
+-git rm -r . (elimino tutto dalla cartella)
+-git rm nomefiel (elimino sia da git hub che cartella pc)
+-git rm cached nomefile ( elimino file, poi committo e pusho) 
+
+//annullare commit:
+-git reset --soft
+-git reset --hard 
+-git reset --mixed
+-git stash (ripristino tutto a ultimo commit) 
+-git fetch origin
+ git reset --hard origin/master (elimino tutti i cambiamenti e i commits in locale e sposto il main branch all'ultima versione remota) 
+
+-REMOTO: 
+//creare collegamento:
+-git remote add origin URL (collego repository remota e locale)  
+-git push origin -u master ( carico branch "master" dentro reposotory origin) //chiede credenziali 
+-git clone URL (clonare origin in locale) ---->inizzializzazione repository per una direcotry remota  
+-git remote -v (verificare il collegamento)
+-git push --->inviare le modifiche alla repository remota 
+-git push origin master ( più specifico ) 
+-git pull (aggiornare la repository al commit più recente del remoto) ---> esegue fetch e marge (recupera e incorpora) dal remoto al locale 
+-git merge <branch> (incorporo nel branch attivo) 
+
+//modificare origin:
+-git remote rename origin nuovonome (rinomino server) 
+-git remote remove origin (rimuovo collegamento remoto)
+
+//branching: 
+-git checkout -b feature_x (nuovo branch)
+-git checkout main (andare in un branch già esistente)
+-git push origin <branch> (rendere disponibile nuovo branch alla repository remota)
+-git log --all --decorate --oneline --graph (vedere percorso eseguito dalle commit) 
+
+COMANDI XML:
+-
+-
+-
+-
+-
+-
+-
+
