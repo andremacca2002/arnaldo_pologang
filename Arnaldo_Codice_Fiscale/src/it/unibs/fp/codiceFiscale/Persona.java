@@ -4,14 +4,14 @@ public class Persona {
 	String nome;
 	String cognome;
 	String sesso;
-	String comune;
+	String luogoNascita;
 	String data;
 	
 	public Persona(String nome, String cognome, String sesso, String comune, String data) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.sesso = sesso;
-		this.comune = comune;
+		this.luogoNascita = comune;
 		this.data = data;
 	}
 	
@@ -39,12 +39,12 @@ public class Persona {
 		this.sesso = sesso;
 	}
 	
-	public String getComune() {
-		return comune;
+	public String getLuogoNascita() {
+		return luogoNascita;
 	}
 	
-	public void setComune(String comune) {
-		this.comune = comune;
+	public void setLuogoNascita(String comune) {
+		this.luogoNascita = comune;
 	}
 	
 	public String getData() {
