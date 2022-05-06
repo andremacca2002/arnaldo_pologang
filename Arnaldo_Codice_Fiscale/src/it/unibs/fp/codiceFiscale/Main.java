@@ -88,11 +88,11 @@ public class Main {
 					for(int j = 0; j < nome.length(); j++) {
 						if(k < 3) {
 							if((nome.charAt(j) != '\u0041') && (nome.charAt(j) != '\u0045') && (nome.charAt(j) != '\u0049') && (nome.charAt(j) != '\u004F') && (nome.charAt(j) != '\u0055')) {
-								if(z == 1) {
+								if(z != 1) {
 									codiceNome[k] = nome.charAt(j);
+									k++;
 								}
-								z++;	
-								k++;
+								z++;
 							}
 						}
 					}
