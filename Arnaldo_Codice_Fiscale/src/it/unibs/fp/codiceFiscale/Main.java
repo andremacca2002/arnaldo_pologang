@@ -17,8 +17,10 @@ public class Main {
 			String codiceFiscale = null;
 			String cognome = Utility_Xml.persona.get(i).getCognome();
 			String nome = Utility_Xml.persona.get(i).getNome();
+			String data = Utility_Xml.persona.get(i).getData();
 			char [] codiceCognome = new char[3];
 			char [] codiceNome = new char[3];
+			char [] codiceData = new char[3];
 			int numCons;
 			
 			if(cognome.length() < 3) {
@@ -133,9 +135,76 @@ public class Main {
 				}
 			}
 			codiceFiscale = codiceFiscale + Arrays.toString(codiceNome).replace("[", "").replace("]", "").replace(", ", "");
+			
+			for(int j = 0; j < 3; j++) {
+				codiceData[j] = data.charAt(j+2);
+				if(j == 2) {
+					String mese = data.substring(5, 7);
+					System.out.println(mese);
+					switch (mese) {
+						case "01": codiceData[j] = 'A';
+							break;
+						case "02": codiceData[j] = 'B';
+							break;
+						case "03": codiceData[j] = 'C';
+							break;
+						case "04": codiceData[j] = 'D';
+							break;
+						case "05": codiceData[j] = 'E';
+							break;
+						case "06": codiceData[j] = 'H';
+							break;
+						case "07": codiceData[j] = 'L';
+							break;
+						case "08": codiceData[j] = 'M';
+							break;
+						case "09": codiceData[j] = 'P';
+							break;
+						case "10": codiceData[j] = 'R';
+							break;
+						case "11": codiceData[j] = 'S';
+							break;
+						case "12": codiceData[j] = 'T';
+							break;
+					}
+				}
+			}
+			codiceFiscale = codiceFiscale + Arrays.toString(codiceData).replace("[", "").replace("]", "").replace(", ", "");
+			
+			for(int j = 0; j < 3; j++) {
+				codiceData[j] = data.charAt(j+2);
+				if(j == 2) {
+					String mese = data.substring(5, 7);
+					System.out.println(mese);
+					switch (mese) {
+						case "01": codiceData[j] = 'A';
+							break;
+						case "02": codiceData[j] = 'B';
+							break;
+						case "03": codiceData[j] = 'C';
+							break;
+						case "04": codiceData[j] = 'D';
+							break;
+						case "05": codiceData[j] = 'E';
+							break;
+						case "06": codiceData[j] = 'H';
+							break;
+						case "07": codiceData[j] = 'L';
+							break;
+						case "08": codiceData[j] = 'M';
+							break;
+						case "09": codiceData[j] = 'P';
+							break;
+						case "10": codiceData[j] = 'R';
+							break;
+						case "11": codiceData[j] = 'S';
+							break;
+						case "12": codiceData[j] = 'T';
+							break;
+					}
+				}
+			}
 			System.out.println(codiceFiscale);
-		}
-		
+		}	
 	}
-
 }
