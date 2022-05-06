@@ -1,23 +1,139 @@
 package it.unibs.fp.codiceFiscale;
 import javax.xml.stream.*;
-
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
-
 	public static void main(String[] args) throws XMLStreamException {
+		ArrayList<String> codiciInvalidi = new ArrayList<String>();
+		//ArrayList<String> codiciFiscali = new ArrayList<String>();
 		
-		String path = null;
-		path = new File("inputPersone.xml").getPath();
+		String pathPersone = null;
+		pathPersone = new File("inputPersone.xml").getPath();
 		
-		Utility_Xml.Inizializzazione(path);
+		Utility_Xml.inizializzazione(pathPersone);
 
 		String pathComuni = null;
 		pathComuni = new File("comuni.xml").getPath();
 		
-		Utility_Xml.Inizializzazione(pathComuni);
+		Utility_Xml.inizializzazione(pathComuni);
 		
+		creazioneCF();
+		
+		String pathCodici = null;
+		pathCodici = new File("codiciFiscali.xml").getPath();
+		
+		ControlloCodici.inizializzazione(pathCodici);
+		
+		for(int i = 0; i < ControlloCodici.codiciFiscali.size(); i++) {
+			if(ControlloCodici.codiciFiscali.get(i).length() != 16) {
+				codiciInvalidi.add(ControlloCodici.codiciFiscali.get(i));
+			}
+			else {
+				boolean valido = true;
+				char car;
+				
+				for(int j = 0; j < 6 && valido; j++) {
+					car = ControlloCodici.codiciFiscali.get(i).charAt(j);
+					if(!(Character.isAlphabetic(car))) {
+						codiciInvalidi.add(ControlloCodici.codiciFiscali.get(i));
+						valido = false;
+					}
+				}
+				
+				for(int j = 6; j < 8 && valido; j++) {
+					car = ControlloCodici.codiciFiscali.get(i).charAt(j);
+					if(!(Character.isDigit(car))) {
+						codiciInvalidi.add(ControlloCodici.codiciFiscali.get(i));
+						valido = false;
+					}
+				}
+				
+				car = ControlloCodici.codiciFiscali.get(i).charAt(8);
+				
+				if((car != 'A') || (car != 'B') || (car != 'C') || (car != 'D') || (car != 'E') || (car != 'H') || (car != 'L') || (car != 'M') || (car != 'P') || (car != 'R') || (car != 'S') || (car != 'T')) {
+					codiciInvalidi.add(ControlloCodici.codiciFiscali.get(i));
+					valido = false;
+				}
+				
+				ControlloCodici.codiciFiscali.get(i).substring(9, 11);
+				
+				if() {
+					
+				}
+			}
+		}
+		
+		
+		
+		/*String[] persona = {"Matteo", "Samuele", "Alessandro", "Nikita"}; // sostituisci con persona
+		try { // blocco try per raccogliere eccezioni
+		xmlw.writeStartElement("OUTPUT"); //inizio elemento output 
+		xmlw.writeComment("INIZIO LISTA PERSONE"); 
+		xmlw.writeStartElement("persone");//inizio elemento persone (con numero persone come attr.) 
+		xmlw.writeAttribute("numero", Integer.toString(persone.size)); //iniserisci numero persone 
+
+		for (int i = 0; i < persone.size; i++) {
+		xmlw.writeStartElement("persona");
+		xmlw.writeAttribute("id", Integer.toString(i));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("nome"); 
+		xmlw.writeCharacters(persone.get(i).get(nome));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("cognome");
+		xmlw.writeCharacters(persone.get(i).get(cognome));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("sesso"); 
+		xmlw.writeCharacters(persone.get(i).get(sesso));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("luogodinascita");
+		xmlw.writeCharacters(persone.get(i).get(luogodiNascita));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("data"); 
+		xmlw.writeCharacters(persone.get(i).get(data));
+		xmlw.writeEndElement();
+		xmlw.writeStartElement("codice fiscale"); 
+		xmlw.writeCharacters(codifiscali[i]); // creare array
+		xmlw.writeEndElement(); 
+		}
+		[17:14]
+		mlw.writeStartElement("codici");
+		xmlw.writeComment("INIZIO LISTA CODICI"); 
+
+		mlw.writeStartElement("invalidi");
+		xmlw.writeAttribute("numero", Integer.toString(codiciInvalidi.size));
+
+		for (int i = 0; i < codiciinvalidi.size; i++) {
+		xmlw.writeStartElement("codice"); 
+		xmlw.writeCharacters(codiciInvalidi.get(i)); 
+		xmlw.writeEndElement(); 
+		}
+		xmlw.writeEndElement();
+
+		mlw.writeStartElement("spaiati");
+		xmlw.writeAttribute("numero", Integer.toString(codiciSpaiati.size));
+
+		for (int i = 0; i < codiciSpaiati.size; i++) {
+		xmlw.writeStartElement("codice"); 
+		xmlw.writeCharacters(codiciSpaiati.get(i));
+		xmlw.writeEndElement(); 
+		}
+		xmlw.writeEndElement();
+
+		xmlw.writeEndElement(); // chiusura di </OUTPUT>
+		xmlw.writeEndDocument(); // scrittura della fine del documento
+		xmlw.flush(); // svuota il buffer e procede alla scrittura
+		xmlw.close(); // chiusura del documento e delle risorse impiegate
+		} catch (Exception e) { // se c’è un errore viene eseguita questa parte
+		System.out.println("Errore nella scrittura");
+		*/
+		
+		
+		
+	}
+
+	public static void creazioneCF() {
 		for(int i = 0; i < Utility_Xml.persona.size(); i++) {
 			String codiceFiscale = null;
 			String cognome = Utility_Xml.persona.get(i).getCognome();
@@ -197,65 +313,223 @@ public class Main {
 				}
 			}
 			
-			for(int d = 0; d < codiceFiscale.length(); d = d +2) {
+			for(int d = 0; d < codiceFiscale.length(); d = d + 2) {
+				int valore = 0;
 				switch (codiceFiscale.charAt(d)) {
-				case '0': codiceData[j] = 'A';
-					break;
-				case '1': codiceData[j] = 'B';
-					break;
-				case '2': codiceData[j] = 'C';
-					break;
-				case '3': codiceData[j] = 'D';
-					break;
-				case '4': codiceData[j] = 'E';
-					break;
-				case '5': codiceData[j] = 'H';
-					break;
-				case '6': codiceData[j] = 'L';
-					break;
-				case '7': codiceData[j] = 'M';
-					break;
-				case '8': codiceData[j] = 'P';
-					break;
-				case '9': codiceData[j] = 'R';
-					break;
-				case 'A': codiceData[j] = 'S';
-					break;
-				case 'B': codiceData[j] = 'T';
-					break;
-				case 'C': codiceData[j] = 'S';
-					break;
-				case 'D': codiceData[j] = 'T';
-					break;
-				case 'E': codiceData[j] = 'S';
-					break;
-				case 'F': codiceData[j] = 'T';
-					break;
-				case 'G': codiceData[j] = 'S';
-					break;
-				case 'H': codiceData[j] = 'T';
-					break;
-				case 'I': codiceData[j] = 'S';
-					break;
-				case 'j': codiceData[j] = 'T';
-					break;
-				case 'I': codiceData[j] = 'S';
-					break;
-				case 'j': codiceData[j] = 'T';
-					break;
-				case 'I': codiceData[j] = 'S';
-					break;
-				case 'j': codiceData[j] = 'T';
-					break;
+					case '0': valore = 1;
+						break;
+					case '1': valore = 0;
+						break;
+					case '2': valore = 5;
+						break;
+					case '3': valore = 7;
+						break;
+					case '4': valore = 9;
+						break;
+					case '5': valore = 13;
+						break;
+					case '6': valore = 15;
+						break;
+					case '7': valore = 17;
+						break;
+					case '8': valore = 19;
+						break;
+					case '9': valore = 21;
+						break;
+					case 'A': valore = 1;
+						break;
+					case 'B': valore = 0;
+						break;
+					case 'C': valore = 5;
+						break;
+					case 'D': valore = 7;
+						break;
+					case 'E': valore = 9;
+						break;
+					case 'F': valore = 13;
+						break;
+					case 'G': valore = 15;
+						break;
+					case 'H': valore = 17;
+						break;
+					case 'I': valore = 19;
+						break;
+					case 'J': valore = 21;
+						break;
+					case 'K': valore = 2;
+						break;
+					case 'L': valore = 4;
+						break;
+					case 'M': valore = 18;
+						break;
+					case 'N': valore = 20;
+						break;
+					case 'O': valore = 11;
+						break;
+					case 'P': valore = 3;
+						break;
+					case 'Q': valore = 6;
+						break;
+					case 'R': valore = 8;
+						break;
+					case 'S': valore = 12;
+						break;
+					case 'T': valore = 14;
+						break;
+					case 'U': valore = 16;
+						break;
+					case 'V': valore = 10;
+						break;
+					case 'W': valore = 22;
+						break;
+					case 'X': valore = 25;
+						break;
+					case 'Y': valore = 24;
+						break;
+					case 'Z': valore = 23;
+						break;
+				}
+				sommaDisp = sommaDisp + valore;
 			}
 			
-			
+			for(int p = 1; p < codiceFiscale.length(); p = p + 2) {
+				int valore = 0;
+				switch (codiceFiscale.charAt(p)) {
+					case '0': valore = 0;
+						break;
+					case '1': valore = 1;
+						break;
+					case '2': valore = 2;
+						break;
+					case '3': valore = 3;
+						break;
+					case '4': valore = 4;
+						break;
+					case '5': valore = 5;
+						break;
+					case '6': valore = 6;
+						break;
+					case '7': valore = 7;
+						break;
+					case '8': valore = 8;
+						break;
+					case '9': valore = 9;
+						break;
+					case 'A': valore = 0;
+						break;
+					case 'B': valore = 1;
+						break;
+					case 'C': valore = 2;
+						break;
+					case 'D': valore = 3;
+						break;
+					case 'E': valore = 4;
+						break;
+					case 'F': valore = 5;
+						break;
+					case 'G': valore = 6;
+						break;
+					case 'H': valore = 7;
+						break;
+					case 'I': valore = 8;
+						break;
+					case 'J': valore = 9;
+						break;
+					case 'K': valore = 10;
+						break;
+					case 'L': valore = 11;
+						break;
+					case 'M': valore = 12;
+						break;
+					case 'N': valore = 13;
+						break;
+					case 'O': valore = 14;
+						break;
+					case 'P': valore = 15;
+						break;
+					case 'Q': valore = 16;
+						break;
+					case 'R': valore = 17;
+						break;
+					case 'S': valore = 18;
+						break;
+					case 'T': valore = 19;
+						break;
+					case 'U': valore = 20;
+						break;
+					case 'V': valore = 21;
+						break;
+					case 'W': valore = 22;
+						break;
+					case 'X': valore = 23;
+						break;
+					case 'Y': valore = 24;
+						break;
+					case 'Z': valore = 25;
+						break;
+				}
+				sommaPari = sommaPari + valore;
 			}
-				sommaDisp = sommaDisp + codiceFiscale.charAt(d);
 			
+			int codiceControllo = (sommaPari + sommaDisp) % 26;
 			
-			
-			System.out.println(codiceFiscale);
-		}	
+			String valore = null;
+			switch (codiceControllo) {
+				case 0: valore = "A";
+					break;
+				case 1: valore = "B";
+					break;
+				case 2: valore = "C";
+					break;
+				case 3: valore = "D";
+					break;
+				case 4: valore = "E";
+					break;
+				case 5: valore = "F";
+					break;
+				case 6: valore = "G";
+					break;
+				case 7: valore = "H";
+					break;
+				case 8: valore = "I";
+					break;
+				case 9: valore = "J";
+					break;
+				case 10: valore = "K";
+					break;
+				case 11: valore = "L";
+					break;
+				case 12: valore = "M";
+					break;
+				case 13: valore = "N";
+					break;
+				case 14: valore = "O";
+					break;
+				case 15: valore = "P";
+					break;
+				case 16: valore = "Q";
+					break;
+				case 17: valore = "R";
+					break;
+				case 18: valore = "S";
+					break;
+				case 19: valore = "T";
+					break;
+				case 20: valore = "U";
+					break;
+				case 21: valore = "V";
+					break;
+				case 22: valore = "W";
+					break;
+				case 23: valore = "X";
+					break;
+				case 24: valore = "Y";
+					break;
+				case 25: valore = "Z";
+					break;
+			}
+			codiceFiscale = codiceFiscale + valore;
+		}
 	}
+
 }

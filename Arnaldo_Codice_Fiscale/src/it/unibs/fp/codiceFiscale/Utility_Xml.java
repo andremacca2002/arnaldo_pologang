@@ -2,7 +2,6 @@ package it.unibs.fp.codiceFiscale;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-
 import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -13,7 +12,7 @@ public class Utility_Xml {
 		static ArrayList<Persona> persona = new ArrayList<Persona>();
 		static ArrayList<Comune> comune = new ArrayList<Comune>();
 		
-		public static void Inizializzazione(String path) throws FactoryConfigurationError, XMLStreamException {
+		public static void inizializzazione(String path) throws FactoryConfigurationError, XMLStreamException {
 			XMLInputFactory xmlif = null;
 			XMLStreamReader xmlr = null;
 			String nome = null;
