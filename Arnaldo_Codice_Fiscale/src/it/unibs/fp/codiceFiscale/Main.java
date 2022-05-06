@@ -13,12 +13,24 @@ public class Main {
 		
 		Utility_Xml.Inizializzazione(path);
 
+		String pathComuni = null;
+		pathComuni = new File("comuni.xml").getPath();
+		
+		Utility_Xml.Inizializzazione(pathComuni);
+		
 		for(int i = 0; i < Utility_Xml.persona.size(); i++) {
 			String codiceFiscale = null;
 			String cognome = Utility_Xml.persona.get(i).getCognome();
 			String nome = Utility_Xml.persona.get(i).getNome();
+			String data = Utility_Xml.persona.get(i).getData();
+			String sesso = Utility_Xml.persona.get(i).getSesso();
+			String comune = Utility_Xml.persona.get(i).getLuogoNascita();
+			int sommaDisp = 0;
+			int sommaPari = 0;
+			
 			char [] codiceCognome = new char[3];
 			char [] codiceNome = new char[3];
+			char [] codiceData = new char[3];
 			int numCons;
 			
 			if(cognome.length() < 3) {
@@ -133,9 +145,117 @@ public class Main {
 				}
 			}
 			codiceFiscale = codiceFiscale + Arrays.toString(codiceNome).replace("[", "").replace("]", "").replace(", ", "");
-			System.out.println(codiceFiscale);
-		}
-		
-	}
+			
+			for(int j = 0; j < 3; j++) {
+				codiceData[j] = data.charAt(j+2);
+				if(j == 2) {
+					String mese = data.substring(5, 7);
 
+					switch (mese) {
+						case "01": codiceData[j] = 'A';
+							break;
+						case "02": codiceData[j] = 'B';
+							break;
+						case "03": codiceData[j] = 'C';
+							break;
+						case "04": codiceData[j] = 'D';
+							break;
+						case "05": codiceData[j] = 'E';
+							break;
+						case "06": codiceData[j] = 'H';
+							break;
+						case "07": codiceData[j] = 'L';
+							break;
+						case "08": codiceData[j] = 'M';
+							break;
+						case "09": codiceData[j] = 'P';
+							break;
+						case "10": codiceData[j] = 'R';
+							break;
+						case "11": codiceData[j] = 'S';
+							break;
+						case "12": codiceData[j] = 'T';
+							break;
+					}
+				}
+			}
+			codiceFiscale = codiceFiscale + Arrays.toString(codiceData).replace("[", "").replace("]", "").replace(", ", "");
+			
+			if(sesso.equals("F")) {
+				String giorno = data.substring(8, 10);
+				int codSesso = Integer.parseInt(giorno) + 40;
+				codiceFiscale = codiceFiscale + String.valueOf(codSesso);
+			}
+			else {
+				String giorno = data.substring(8, 10);
+				codiceFiscale = codiceFiscale + giorno;
+			}
+			
+			for(int j = 0; j < Utility_Xml.comune.size(); j++) {
+				if (comune.equals(Utility_Xml.comune.get(j).getNome())) {
+					codiceFiscale = codiceFiscale + Utility_Xml.comune.get(j).getCodice();
+				}
+			}
+			
+			for(int d = 0; d < codiceFiscale.length(); d = d +2) {
+				switch (codiceFiscale.charAt(d)) {
+				case '0': codiceData[j] = 'A';
+					break;
+				case '1': codiceData[j] = 'B';
+					break;
+				case '2': codiceData[j] = 'C';
+					break;
+				case '3': codiceData[j] = 'D';
+					break;
+				case '4': codiceData[j] = 'E';
+					break;
+				case '5': codiceData[j] = 'H';
+					break;
+				case '6': codiceData[j] = 'L';
+					break;
+				case '7': codiceData[j] = 'M';
+					break;
+				case '8': codiceData[j] = 'P';
+					break;
+				case '9': codiceData[j] = 'R';
+					break;
+				case 'A': codiceData[j] = 'S';
+					break;
+				case 'B': codiceData[j] = 'T';
+					break;
+				case 'C': codiceData[j] = 'S';
+					break;
+				case 'D': codiceData[j] = 'T';
+					break;
+				case 'E': codiceData[j] = 'S';
+					break;
+				case 'F': codiceData[j] = 'T';
+					break;
+				case 'G': codiceData[j] = 'S';
+					break;
+				case 'H': codiceData[j] = 'T';
+					break;
+				case 'I': codiceData[j] = 'S';
+					break;
+				case 'j': codiceData[j] = 'T';
+					break;
+				case 'I': codiceData[j] = 'S';
+					break;
+				case 'j': codiceData[j] = 'T';
+					break;
+				case 'I': codiceData[j] = 'S';
+					break;
+				case 'j': codiceData[j] = 'T';
+					break;
+			}
+			
+			
+			}
+				sommaDisp = sommaDisp + codiceFiscale.charAt(d);
+			
+			
+			
+			System.out.println(codiceFiscale);
+		}	
+	}
 }
