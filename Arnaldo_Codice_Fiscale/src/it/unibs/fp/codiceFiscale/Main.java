@@ -2,6 +2,7 @@ package it.unibs.fp.codiceFiscale;
 import javax.xml.stream.*;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Main {
 
@@ -66,9 +67,8 @@ public class Main {
 				}
 			}
 			
-			codiceFiscale = codiceCognome.
-			//ciao
-			System.out.println(codiceFiscale);
+			codiceFiscale = Arrays.toString(codiceCognome);
+			codiceFiscale = codiceFiscale.replace("[", "").replace("]", "").replace(", ", "");
 			
 			if(nome.length() < 3) {
 				for(int j = 0; j < nome.length(); j++) {
@@ -129,12 +129,11 @@ public class Main {
 								z++;
 							}
 						}
-					}
-				
+					}	
 				}
 			}
-			/*codiceFiscale = codiceFiscale + codiceNome.toString();
-			System.out.println(codiceFiscale);*/
+			codiceFiscale = codiceFiscale + Arrays.toString(codiceNome).replace("[", "").replace("]", "").replace(", ", "");
+			System.out.println(codiceFiscale);
 		}
 		
 	}
