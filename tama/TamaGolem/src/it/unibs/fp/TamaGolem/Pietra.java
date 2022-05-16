@@ -12,4 +12,11 @@ public class Pietra {
     public Elemento getElemento() {
         return elemento;
     }
+
+	
+	public String toString() {
+		return elemento.toString();
+	}
+    
+    
 }

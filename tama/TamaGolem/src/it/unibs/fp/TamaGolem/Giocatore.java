@@ -1,10 +1,17 @@
 package it.unibs.fp.TamaGolem;
 
+import java.util.Arrays;
+
 public class Giocatore {
 	
 	private String nome;
 	private TamaGolem [] tamagolems = new TamaGolem[2];
 	
+	public Giocatore(String nome, TamaGolem[] tamagolems) {
+		this.nome = nome;
+		this.tamagolems = tamagolems;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -20,11 +27,13 @@ public class Giocatore {
 	public void setTamagolems(TamaGolem[] tamagolems) {
 		this.tamagolems = tamagolems;
 	}
-	
-	public Giocatore(String nome, TamaGolem[] tamagolems) {
-		this.nome = nome;
-		this.tamagolems = tamagolems;
+
+	@Override
+	public String toString() {
+		return "Giocatore [nome=" + nome + ", tamagolems=" + Arrays.toString(tamagolems) + "]";
 	}
+	
+	
 	
 	
 }

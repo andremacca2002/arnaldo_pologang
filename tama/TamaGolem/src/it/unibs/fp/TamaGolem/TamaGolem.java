@@ -2,10 +2,11 @@ package it.unibs.fp.TamaGolem;
 
 public class TamaGolem {
 	
-	int vita = 10;
-	Pietra [] pietre = new Pietra[3];
+	private int vita;
+	private String nome;
+	private Pietra [] pietre = new Pietra[3];
 	
-	public TamaGolem(int vita, Pietra [] pietre) {
+	public TamaGolem(int vita, Pietra [] pietre, String nome) {
 		this.vita = vita;
 		this.pietre = pietre;
 	}
@@ -25,4 +26,13 @@ public class TamaGolem {
 	public void setPietre(Pietra [] pietre) {
 	        this.pietre = pietre;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }
