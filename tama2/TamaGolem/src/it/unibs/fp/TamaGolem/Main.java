@@ -52,8 +52,17 @@ public class Main {
 						//giocatore2.toString();
 						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
 						
-						TamaGolem tamaE=Fase2.evocazione(giocatore1, giocatore1.getTamagolems());
-						Fase2.assegnaPietra(tamaE);
+						TamaGolem tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems());
+						Fase2.assegnaPietra(tamaE1);
+						
+						
+						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
+						
+						TamaGolem tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
+						Fase2.assegnaPietra(tamaE2);
+						
+						System.out.println("Diamo inizio alla battaglia!");
+						
 						break;
 						
 					case 3:

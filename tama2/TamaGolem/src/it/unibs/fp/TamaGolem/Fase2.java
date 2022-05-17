@@ -12,7 +12,7 @@ public class Fase2 {
 		static MyMenu menu = new MyMenu(scelta, voci);
 		
 		static String scelta1 = STR_Utili.SCELTATAMAGOLEM; //menu scelta tamagolem da evocare 
-		static String voci1[]= {""};
+		static String voci1[]= {"", ""};
 		static MyMenu menu1 = new MyMenu(scelta1, voci1);
 		
 		private Giocatore giocatore;
@@ -37,7 +37,7 @@ public class Fase2 {
 		Pietra pietreTama2[]= new Pietra[3];
 		
 		TamaGolem tama1= new TamaGolem(vita, pietreTama1,nomeTam1);
-		TamaGolem tama2= new TamaGolem(vita, pietreTama2,nomeTam1);
+		TamaGolem tama2= new TamaGolem(vita, pietreTama2,nomeTam2);
 		
 		TamaGolem tamaSquad[]=new TamaGolem[2];
 		
@@ -49,15 +49,14 @@ public class Fase2 {
 		return giocatore;
 		}
 
-		
-		
 		public static TamaGolem evocazione(Giocatore giocatore, TamaGolem[] tamagang ) {
 			
 		TamaGolem tamaEvocato=null;	
+		
 		if(tamagang.length==0)
 	    	System.out.println("hai esaurito i tuoi tamagolem");
 	    else {
-			for(int j=0; j< tamagang.length; j++){
+			for(int j=0; j < tamagang.length; j++){
 					voci1[j]=tamagang[j].getNome();
 					}
 			
@@ -86,7 +85,6 @@ public class Fase2 {
 		return tamaEvocato;
 	    
 		}
-		
 		
 		public static void assegnaPietra(TamaGolem tama) {
 				int scelta3;
@@ -134,7 +132,7 @@ public class Fase2 {
 					}
 				} while(i < 3);
 				
-				System.out.println("hai scelto: ");
+				System.out.println("\nhai scelto: \n ");
 				
 				for(i=0; i<3; i++) System.out.println(pietre[i].toString()+ " ");
 				

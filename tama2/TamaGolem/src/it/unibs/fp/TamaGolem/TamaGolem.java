@@ -11,6 +11,7 @@ public class TamaGolem {
 	public TamaGolem(int vita, Pietra [] pietre, String nome) {
 		this.vita = vita;
 		this.pietre = pietre;
+		this.nome = nome;
 	}
 	 public int getVita() {
 	        return vita;
