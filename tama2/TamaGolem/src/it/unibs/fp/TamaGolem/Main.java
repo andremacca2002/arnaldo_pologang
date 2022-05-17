@@ -21,7 +21,9 @@ public class Main {
 		String [] vocimain = STR_Utili.ELENCO_SCELTAINIZIALE;
 		
 		MyMenu mainmenu = new MyMenu(sceltamain, vocimain);
-
+		
+		boolean[][] scortaPietre = ScortaPietre.inizializzazioneScorta();
+		
 		int scelta;
 	
 			do {									//do while che gestisce le scelte dell'utente	
@@ -44,22 +46,22 @@ public class Main {
 						
 						System.out.println("Tocca al giocatore 1: ");
 						Giocatore giocatore1;
-						giocatore1 = Fase2.registragiocatore();
+						giocatore1 = Fase2.registraGiocatore();
 						
-						System.out.println("Tocca al giocatore 2: ");
+						System.out.println("\nTocca al giocatore 2: ");
 						Giocatore giocatore2;
-						giocatore2 = Fase2.registragiocatore();
+						giocatore2 = Fase2.registraGiocatore();
 						//giocatore2.toString();
-						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
+						System.out.println("\nPotete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
 						
 						TamaGolem tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems());
-						Fase2.assegnaPietra(tamaE1);
+						Fase2.assegnaPietra(tamaE1, scortaPietre);
 						
 						
 						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
 						
 						TamaGolem tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
-						Fase2.assegnaPietra(tamaE2);
+						Fase2.assegnaPietra(tamaE2, scortaPietre);
 						
 						System.out.println("Diamo inizio alla battaglia!");
 						
