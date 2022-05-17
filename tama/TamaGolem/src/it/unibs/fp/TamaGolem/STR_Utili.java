@@ -2,7 +2,8 @@ package it.unibs.fp.TamaGolem;
 
 public class STR_Utili {
 	
-	public static final String SCELTAPIETRE = "Assegna al tamagolem 3 pietre con un elemento a piacere tra i cinque di seguito:";
+	public static final String SCELTAPIETRE = "Assegna al tamagolem 3 pietre di un elemento a piacere tra i cinque di seguito:";
+	public static final String SCELTATAMAGOLEM = "tamagolem disponibili nella tua squadra: ";
 	public static final String [] ELENCO_ELEMENTI = {Elemento.BARBECUE.getNome(), Elemento.KETCHUP.getNome(),Elemento.MAIONESE.getNome(),Elemento.TERIYAKI.getNome(),Elemento.YOGURT.getNome()};
 	public static final String [] ELENCO_SCELTAINIZIALE = {"Esponi regolamento", "Incomincia una battaglia", "Lascia il campo di battaglia"};
 	public static final String BENVENUTO = "Benvenuto nel magico mondo dei Tamagolem, dove solo il più forte può rimanere, cosa volete fare:\n";

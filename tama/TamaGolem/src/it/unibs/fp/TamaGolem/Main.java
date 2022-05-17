@@ -16,20 +16,18 @@ public class Main {
 	public static void main(String[] args) {
 	
 		
-		TamaGolem tama = null;
+		String sceltamain = STR_Utili.BENVENUTO;
 		
-		String scelta = STR_Utili.BENVENUTO;
+		String [] vocimain = STR_Utili.ELENCO_SCELTAINIZIALE;
 		
-		String [] voci = STR_Utili.ELENCO_SCELTAINIZIALE;
-		
-		MyMenu menu = new MyMenu(scelta, voci);
+		MyMenu mainmenu = new MyMenu(sceltamain, vocimain);
 
-		int scelta1;
-		
-			int i=0;
+		int scelta;
+	
 			do {									//do while che gestisce le scelte dell'utente	
-				scelta1 = menu.scegli();
-				switch(scelta1) {
+				scelta = mainmenu.scegli();
+				
+				switch(scelta) {
 					
 					case 1: 
 							System.out.println(STR_Utili.SPIEGAZIONE_GIOCO);
@@ -41,42 +39,32 @@ public class Main {
 						break;
 					
 					case 2:
+						
 						System.out.println("Bene, prima di combattere dovete Registrare voi e la vostra squadra di tamagolem: \n");
-						String nome1 =InputDati.leggiStringaNonVuota("Tocca al giocatore 1:\n Come ti chiami? ");
 						
-						System.out.println("tocca ai tuoi tamagolem, come si chiamano?\n ");
+						System.out.println("Tocca al giocatore 1: ");
+						Giocatore giocatore1;
+						giocatore1 = Fase2.registragiocatore();
 						
-						String nomeTam1=InputDati.leggiStringaNonVuota("->");
-						String nomeTam2=InputDati.leggiStringaNonVuota("->");
+						System.out.println("Tocca al giocatore 2: ");
+						Giocatore giocatore2;
+						giocatore2 = Fase2.registragiocatore();
+						//giocatore2.toString();
+						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
 						
-						int vita=10;
-						Pietra pietreTama1[]= new Pietra[3];
-						Pietra pietreTama2[]= new Pietra[3];
-						TamaGolem tama1= new TamaGolem(vita, pietreTama1,nomeTam1);
-						TamaGolem tama2= new TamaGolem(vita, pietreTama2,nomeTam1);
-						TamaGolem tamaSquad[]=new TamaGolem[2];
-						
-						tamaSquad[0]=tama1;
-						tamaSquad[1]=tama2;
-							
-						Giocatore giocatore1 = new Giocatore(nome1, tamaSquad);
-						giocatore1.toString();
+						TamaGolem tamaE=Fase2.evocazione(giocatore1, giocatore1.getTamagolems());
+						Fase2.assegnaPietra(tamaE);
 						break;
 						
 					case 3:
-						
 						
 						break;
 
 				}
 				
-			} while(scelta1!=0);
+			} while(scelta!=0);
 	}	
 
-//TamaGolem tama = null;
-//Fase1.creaEquilibrio();
-
-//Fase2.assegnaPietre(tama);
 }
 
 

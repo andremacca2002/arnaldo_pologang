@@ -1,5 +1,7 @@
 package it.unibs.fp.TamaGolem;
 
+import java.util.Arrays;
+
 public class TamaGolem {
 	
 	private int vita;
@@ -33,6 +35,9 @@ public class TamaGolem {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String toString() {
+		return "TamaGolem [vita=" + vita + ", nome=" + nome;
 	}
 	
 }

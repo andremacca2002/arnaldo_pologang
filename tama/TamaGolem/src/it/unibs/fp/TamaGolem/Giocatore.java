@@ -28,9 +28,8 @@ public class Giocatore {
 		this.tamagolems = tamagolems;
 	}
 
-	@Override
 	public String toString() {
-		return "Giocatore [nome=" + nome + ", tamagolems=" + Arrays.toString(tamagolems) + "]";
+		return "Giocatore [nome=" + nome + ", tamagolems=" + tamagolems.toString() + "]";
 	}
 	
 	
