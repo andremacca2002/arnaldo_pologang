@@ -45,24 +45,6 @@ public class Fase2 {
 			
 			return giocatore;
 			
-			/*String nomeTam1 = InputDati.leggiStringaNonVuota("->");
-			String nomeTam2 = InputDati.leggiStringaNonVuota("->");
-			
-			
-			Pietra pietreTama1[]= new Pietra[3];
-			Pietra pietreTama2[]= new Pietra[3];
-			
-			TamaGolem tama1= new TamaGolem(vita, pietreTama1,nomeTam1);
-			TamaGolem tama2= new TamaGolem(vita, pietreTama2,nomeTam2);
-			
-			TamaGolem tamaSquad[]=new TamaGolem[2];
-			
-			tamaSquad[0]=tama1;
-			tamaSquad[1]=tama2;
-				
-			Giocatore giocatore = new Giocatore(nome, tamaSquad);
-			
-			return giocatore;*/
 		}
 
 		public static TamaGolem evocazione(Giocatore giocatore, TamaGolem[] tamaGang) {
@@ -78,29 +60,42 @@ public class Fase2 {
 				
 			    System.out.println(giocatore.getNome() + " quale tamagolem vuoi evocare?");
 			    int scelta2 = 0;
+			    boolean valido = false;
+			    
 			    do {
+
 					scelta2 = menu1.scegli();
 					switch(scelta2) {
 						case 0:
 							System.out.println("WARNING: non è possibile uscire!");
 							break;
 						case 1: 
-							tamaEvocato = tamaGang[0];
-							//scelta2=0;
+							if(tamaGang[0].getVita() <= 0) {
+								System.out.println("TamaGolem esausto!");
+							}
+							else {
+								tamaEvocato = tamaGang[0];
+								valido = true;
+							}
 							
 							break;
 						case 2:
-							tamaEvocato = tamaGang[1];
-							//scelta2=0;
+							if(tamaGang[1].getVita() <= 0) {
+								System.out.println("TamaGolem esausto!");
+							}
+							else {
+								tamaEvocato = tamaGang[1];
+								valido = true;
+							}
 							
 							break;
 					}
-			    }while(scelta2 != 1 && scelta2 != 2);
+			    }while(scelta2 != 1 && scelta2 != 2 && !valido);
 		    }
 			return tamaEvocato;
 		}
 		
-		public static void assegnaPietra(TamaGolem tama, boolean[][] scorta) {
+		public static  void assegnaPietra(TamaGolem tama, boolean[][] scorta) {
 				int scelta3;
 				
 				
@@ -209,18 +204,53 @@ public class Fase2 {
 				
 				System.out.println("\nHai scelto: \n ");
 				
-				for(i=0; i<3; i++) System.out.println(pietre[i].toString() + " ");
+				for(i=0; i<3; i++) System.out.println("-> " + pietre[i].toString() + " ");
 				
 				tama.setPietre(pietre);
-				
-				for(int x = 0; x < 5; x++) {
-					for(int j = 0; j < 3; j++) {
-						System.out.print(scorta[x][j]);
-					}
-					System.out.println();
-				}
 			}
-		}
+		
+		public static int battaglia(TamaGolem tama1, TamaGolem tama2) {
+			int [][] balance = Fase1.creaEquilibrio();
+			Pietra[] pietre1 = tama1.getPietre();
+			Pietra[] pietre2 = tama2.getPietre();
+			int tamaInGioco = 0;
+			
+			do {
+				for(int i=0; i<3; i++) {	
+					System.out.print("\n" + tama1.getNome());
+					System.out.println(" scaglia una pietra " + pietre1[i].getElemento().name() + ".");
+					System.out.print(tama2.getNome());
+					System.out.println(" risponde con una pietra " + pietre2[i].getElemento().name() + ".");
+					
+					int potenza = balance[pietre1[i].getElemento().getId()-1][pietre2[i].getElemento().getId()-1];
+					
+					
+					if(potenza == 0) {
+						System.out.println("\n nessun danno arrecato");
+					}
+					else if(potenza > 0) {
+						System.out.println(tama1.getNome()+" infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama2.getNome());
+						tama2.setVita(tama2.getVita() - Math.abs(potenza));
+						if(tama2.getVita() <= 0) {
+							System.out.println(tama2.getNome()+" ha esaurito la vita, deve lasciare il combattimento");
+							tamaInGioco = 1;
+							break;
+						}
+					}
+					else {
+						System.out.println(tama2.getNome()+" infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama1.getNome());
+						tama1.setVita(tama1.getVita() - Math.abs(potenza));
+						if(tama1.getVita() <= 0) {
+							System.out.println(tama1.getNome() + " ha esaurito la vita, deve lasciare il combattimento");
+							tamaInGioco = 2;
+							break;
+						}
+					}
+				}
+			} while(tama1.getVita() > 0 && tama2.getVita() > 0);	
+		return tamaInGioco;
+	}
+}
 		
 
 			

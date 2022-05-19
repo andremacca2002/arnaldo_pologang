@@ -1,4 +1,6 @@
 package it.unibs.fp.TamaGolem;
+import java.util.*;
+
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
@@ -52,20 +54,67 @@ public class Main {
 						Giocatore giocatore2;
 						giocatore2 = Fase2.registraGiocatore();
 						//giocatore2.toString();
-						System.out.println("\nPotete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
 						
-						TamaGolem tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems());
-						Fase2.assegnaPietra(tamaE1, scortaPietre);
+						ArrayList<TamaGolem> TamaList1 = new ArrayList<TamaGolem>(Arrays.asList(giocatore1.getTamagolems()));
+						ArrayList<TamaGolem> TamaList2 = new ArrayList<TamaGolem>(Arrays.asList(giocatore2.getTamagolems()));
 						
-						
-						System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
-						
-						TamaGolem tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
-						Fase2.assegnaPietra(tamaE2, scortaPietre);
-						
+						int tamaInGioco = 0;
 						System.out.println("Diamo inizio alla battaglia!");
 						
+						TamaGolem tamaE1=null;
+						TamaGolem tamaE2=null;
+						String nomeTama1;
+						String nomeTama2 ;
+						
+						do {
+							if(tamaInGioco == 0){
+								System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta: ");
+								
+								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evoco tamagolem giocatore 1 
+								Fase2.assegnaPietra(tamaE1, scortaPietre); //assegno le pietre al tamagolem
+								
+								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
+								Fase2.assegnaPietra(tamaE2, scortaPietre);
+							}
+							nomeTama1 = tamaE1.getNome();
+							nomeTama2 = tamaE2.getNome();
+							
+							if(tamaInGioco == 1) {
+								for(int i = 0; i < TamaList2.size(); i++) {
+									System.out.println(TamaList2.get(i).getNome() + "   ");
+									if(TamaList2.get(i).getNome().equals(nomeTama2)) {
+										TamaList2.remove(i);
+									}
+								}
+								
+								
+								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
+								Fase2.assegnaPietra(tamaE2, scortaPietre);
+							}
+							
+							nomeTama1 = tamaE1.getNome();
+							nomeTama2 = tamaE2.getNome();
+							
+							if(tamaInGioco == 2) {
+								for(int i = 0; i < TamaList1.size(); i++) {
+									
+									if(TamaList1.get(i).getNome().equals(tamaE1.getNome())) {
+										TamaList1.remove(i);
+									}
+								}
+								
+								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evoco tamagolem giocatore 1 
+								Fase2.assegnaPietra(tamaE1, scortaPietre); //assegno le pietre al tamagolem	
+							}	
+							nomeTama1 = tamaE1.getNome();
+							nomeTama2 = tamaE2.getNome();
+							
+							tamaInGioco = Fase2.battaglia(tamaE1, tamaE2);
+							
+						}  while(giocatore1.getTamagolems().length>0 && giocatore2.getTamagolems().length>0);
+						
 						break;
+						
 						
 					case 3:
 						
