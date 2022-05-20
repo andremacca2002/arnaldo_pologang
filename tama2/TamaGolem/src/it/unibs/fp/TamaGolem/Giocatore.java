@@ -1,7 +1,5 @@
 package it.unibs.fp.TamaGolem;
 
-import java.util.Arrays;
-
 public class Giocatore {
 	
 	private String nome;

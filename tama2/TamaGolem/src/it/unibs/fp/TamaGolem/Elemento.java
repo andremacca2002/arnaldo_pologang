@@ -2,7 +2,7 @@ package it.unibs.fp.TamaGolem;
 
 	public enum Elemento {
 		
-		BARBECUE("pietra barbecue", 1),
+		BARBECUE("pietra barbecue", 1), //elementi scelti
 	    KETCHUP("pietra ketchup", 2),
 		MAIONESE("pietra maionese", 3),
 	    TERIYAKI("pietra teriyaki", 4),

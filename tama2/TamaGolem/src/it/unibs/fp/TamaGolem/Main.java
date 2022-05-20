@@ -1,7 +1,4 @@
 package it.unibs.fp.TamaGolem;
-import java.util.*;
-
-import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 
 
@@ -24,8 +21,6 @@ public class Main {
 		
 		MyMenu mainmenu = new MyMenu(sceltamain, vocimain);
 		
-		boolean[][] scortaPietre = ScortaPietre.inizializzazioneScorta();
-		
 		int scelta;
 	
 			do {									//do while che gestisce le scelte dell'utente	
@@ -43,52 +38,51 @@ public class Main {
 						break;
 					
 					case 2:
-						
+						boolean[][] scortaPietre = ScortaPietre.inizializzazioneScorta(); //scorta di pietre reinizzializzata all'inizio di ogni battaglia 
 						System.out.println("Bene, prima di combattere dovete registrare voi e la vostra squadra di TamaGolem.\n");
 						
 						System.out.println("Tocca al giocatore 1: ");
 						Giocatore giocatore1;
-						giocatore1 = Fase2.registraGiocatore();
+						giocatore1 = Fase2.registraGiocatore(); //giocatare inserisce il suo nome e quello dei suoi tamagolem
 						
 						System.out.println("\nTocca al giocatore 2: ");
 						Giocatore giocatore2;
 						giocatore2 = Fase2.registraGiocatore();
 						
-						//ArrayList<TamaGolem> TamaList1 = new ArrayList<TamaGolem>(Arrays.asList(giocatore1.getTamagolems()));
-						//ArrayList<TamaGolem> TamaList2 = new ArrayList<TamaGolem>(Arrays.asList(giocatore2.getTamagolems()));
+						int tamaInGioco = 0; 
 						
-						int tamaInGioco = 0;
 						System.out.println("\nDiamo inizio alla battaglia!");
 						
 						TamaGolem tamaE1=null;
 						TamaGolem tamaE2=null;
-						int tamaEsausti1 = 0;
+						
+						int tamaEsausti1 = 0; //numero tamagolem perdenti di ogni giocatore
 						int tamaEsausti2 = 0;
 						
 						do {
 							if(tamaInGioco == 0){
 								System.out.println("Potete iniziare lo scontro evocando i vostri Tamagolem uno alla volta.");
 								
-								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evoco tamagolem giocatore 1
+								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evocozione iniziale tamagolem giocatore 1
 								System.out.println();
-								Fase2.assegnaPietra(tamaE1, scortaPietre); //assegno le pietre al tamagolem
+								Fase2.assegnaPietra(tamaE1, scortaPietre); //assegno le pietre al tamagolem1
 								
-								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
+								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());//evocozione iniziale tamagolem giocatore 2
 								System.out.println();
-								Fase2.assegnaPietra(tamaE2, scortaPietre);
+								Fase2.assegnaPietra(tamaE2, scortaPietre);//assegno le pietre al tamagolem2
 							}
 							else if(tamaInGioco == 1) {
-								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems());
+								tamaE2=Fase2.evocazione(giocatore2, giocatore2.getTamagolems()); //evocazione nel caso sia morto un tamagolem di giocatore 2
 								System.out.println();
 								Fase2.assegnaPietra(tamaE2, scortaPietre);
 							}
 							else if(tamaInGioco == 2) {								
-								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evoco tamagolem giocatore 1 
+								tamaE1=Fase2.evocazione(giocatore1, giocatore1.getTamagolems()); //evocazione nel caso sia morto un tamagolem di giocatore 1 
 								System.out.println();
-								Fase2.assegnaPietra(tamaE1, scortaPietre); //assegno le pietre al tamagolem	
+								Fase2.assegnaPietra(tamaE1, scortaPietre); 
 							}	
 							
-							tamaInGioco = Fase2.battaglia(tamaE1, tamaE2);
+							tamaInGioco = Fase2.battaglia(tamaE1, tamaE2); //battaglia restituisce un valore di 1 se il tamagolem di giocatore 2 è morto e viceversa 
 							
 							if(tamaInGioco == 1) {
 								tamaEsausti2++;
@@ -99,6 +93,7 @@ public class Main {
 							
 						}while((tamaEsausti1 < 2) && (tamaEsausti2 < 2));
 						
+						Fase3.finepartita(tamaEsausti1,giocatore1,giocatore2);
 						break;
 					case 3:
 						
