@@ -38,7 +38,10 @@ public class Main {
 						break;
 					
 					case 2:
+						int [][] balance = Fase1.creaEquilibrio();
+						
 						boolean[][] scortaPietre = ScortaPietre.inizializzazioneScorta(); //scorta di pietre reinizzializzata all'inizio di ogni battaglia 
+						
 						System.out.println("Bene, prima di combattere dovete registrare voi e la vostra squadra di TamaGolem.\n");
 						
 						System.out.println("Tocca al giocatore 1: ");
@@ -82,7 +85,7 @@ public class Main {
 								Fase2.assegnaPietra(tamaE1, scortaPietre); 
 							}	
 							
-							tamaInGioco = Fase2.battaglia(tamaE1, tamaE2); //battaglia restituisce un valore di 1 se il tamagolem di giocatore 2 è morto e viceversa 
+							tamaInGioco = Fase2.battaglia(tamaE1, tamaE2, balance); //battaglia restituisce un valore di 1 se il tamagolem di giocatore 2 è morto e viceversa 
 							
 							if(tamaInGioco == 1) {
 								tamaEsausti2++;
@@ -93,12 +96,12 @@ public class Main {
 							
 						}while((tamaEsausti1 < 2) && (tamaEsausti2 < 2));
 						
-						Fase3.finepartita(tamaEsausti1,giocatore1,giocatore2);
-						break;
-					case 3:
+						System.out.println("\nLA BATTAGLIA E' FINITA!\n");
 						
+						Fase3.finePartita(tamaEsausti1,giocatore1,giocatore2);
+						
+						Fase3.visualizzaEquilibrio(balance);
 						break;
-
 				}
 				
 			} while(scelta!=0);

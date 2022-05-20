@@ -219,8 +219,7 @@ public class Fase2 {
 				tama.setPietre(pietre);
 			}
 		
-		public static int battaglia(TamaGolem tama1, TamaGolem tama2) {
-			int [][] balance = Fase1.creaEquilibrio();
+		public static int battaglia(TamaGolem tama1, TamaGolem tama2, int[][] balance) {
 			Pietra[] pietre1 = tama1.getPietre();
 			Pietra[] pietre2 = tama2.getPietre();
 			int tamaInGioco = 0;
