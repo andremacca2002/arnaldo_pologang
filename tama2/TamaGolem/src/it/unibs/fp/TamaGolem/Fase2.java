@@ -56,14 +56,20 @@ public class Fase2 {
 		    	System.out.println("Hai esaurito i tuoi TamaGolem!");
 		    else {
 		    	
-				for(int i = 0; i < tamaGang.length; i++) voci1[i]=tamaGang[i].getNome();
+				for(int i = 0; i < tamaGang.length; i++) {
+					if(tamaGang[i].getVita() <= 0) {
+						voci1[i] = tamaGang[i].getNome() + " - ESAUSTO";
+					}
+					else {
+						voci1[i] = tamaGang[i].getNome();
+					}
+				}
 				
-			    System.out.println(giocatore.getNome() + " quale tamagolem vuoi evocare?");
+			    System.out.println("\n" + giocatore.getNome() + " quale tamagolem vuoi evocare?");
 			    int scelta2 = 0;
 			    boolean valido = false;
 			    
 			    do {
-
 					scelta2 = menu1.scegli();
 					switch(scelta2) {
 						case 0:
@@ -71,7 +77,7 @@ public class Fase2 {
 							break;
 						case 1: 
 							if(tamaGang[0].getVita() <= 0) {
-								System.out.println("TamaGolem esausto!");
+								System.out.println("\nTamaGolem esausto!");
 							}
 							else {
 								tamaEvocato = tamaGang[0];
@@ -90,7 +96,7 @@ public class Fase2 {
 							
 							break;
 					}
-			    }while(scelta2 != 1 && scelta2 != 2 && !valido);
+			    }while((scelta2 != 1 && scelta2 != 2) || !valido);
 		    }
 			return tamaEvocato;
 		}
@@ -107,6 +113,10 @@ public class Fase2 {
 					scelta3 = menu.scegli();
 					int numPietre = 0;
 					switch(scelta3) {
+						case 0:
+							System.out.println("WARNING: non è possibile uscire!");
+							break;
+							
 						case 1:
 							for(int j = 0; j < 3; j++) {
 								if(scorta[Elemento.BARBECUE.getId()-1][j] == true) numPietre++;
@@ -202,7 +212,7 @@ public class Fase2 {
 					ScortaPietre.setScorta(scorta);
 				} while(i < 3);
 				
-				System.out.println("\nHai scelto: \n ");
+				System.out.println("\nHai scelto: ");
 				
 				for(i=0; i<3; i++) System.out.println("-> " + pietre[i].toString() + " ");
 				
@@ -226,10 +236,10 @@ public class Fase2 {
 					
 					
 					if(potenza == 0) {
-						System.out.println("\n nessun danno arrecato");
+						System.out.println("->Nessun danno arrecato.");
 					}
 					else if(potenza > 0) {
-						System.out.println(tama1.getNome()+" infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama2.getNome());
+						System.out.println("->" + tama1.getNome() + " infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama2.getNome());
 						tama2.setVita(tama2.getVita() - Math.abs(potenza));
 						if(tama2.getVita() <= 0) {
 							System.out.println(tama2.getNome()+" ha esaurito la vita, deve lasciare il combattimento");
@@ -238,10 +248,10 @@ public class Fase2 {
 						}
 					}
 					else {
-						System.out.println(tama2.getNome()+" infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama1.getNome());
+						System.out.println("->" + tama2.getNome()+" infligge un danno vitale di "+ Math.abs(potenza) +" a " +tama1.getNome());
 						tama1.setVita(tama1.getVita() - Math.abs(potenza));
 						if(tama1.getVita() <= 0) {
-							System.out.println(tama1.getNome() + " ha esaurito la vita, deve lasciare il combattimento");
+							System.out.println("\n" + tama1.getNome() + " ha esaurito la vita, deve lasciare il combattimento.");
 							tamaInGioco = 2;
 							break;
 						}
@@ -251,8 +261,3 @@ public class Fase2 {
 		return tamaInGioco;
 	}
 }
-		
-
-			
-	
-
