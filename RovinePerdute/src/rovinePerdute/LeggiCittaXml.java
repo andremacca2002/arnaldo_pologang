@@ -16,7 +16,8 @@ public class LeggiCittaXml {
 		String x = null;
 		String y = null;
 		String h = null;
-		ArrayList<String> link = new ArrayList<String>();
+		ArrayList<Citta> cittaperdute = new ArrayList<Citta>();
+		int n=0;
 		
 		try {
 		 xmlif = XMLInputFactory.newInstance();
@@ -33,40 +34,44 @@ public class LeggiCittaXml {
 					 break;
 				 case XMLStreamConstants.START_ELEMENT: // inizio di un elemento: stampa il nome del tag e i suoi attributi
 					 if(xmlr.getLocalName().equals("city")) {
+						 n++;
 						 for (int i = 0; i < xmlr.getAttributeCount(); i++) {
 							 if(xmlr.getAttributeLocalName(i).equals("id")) {
 								 id = xmlr.getAttributeValue(i);
+								 cittaperdute.get(n).setNome(nome);
 								 System.out.println(id);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("name")) {
 								 nome = xmlr.getAttributeValue(i);
+								 cittaperdute.get(n).setNome(nome);
 								 System.out.println(nome);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("x")) {
 								 x = xmlr.getAttributeValue(i);
+								 cittaperdute.get(n).setX(Integer.decode(xmlr.getAttributeValue(i)));
 								 System.out.println(x);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("y")) {
 								 y = xmlr.getAttributeValue(i);
+								 cittaperdute.get(n).setY(Integer.decode(xmlr.getAttributeValue(i)));
 								 System.out.println(y);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("h")) {
 								 h = xmlr.getAttributeValue(i);
+								 cittaperdute.get(n).setH(Integer.decode(xmlr.getAttributeValue(i)));
 								 System.out.println(h);
 							 }
 						 }
 					 }
-					 //xmlr.next();
+					 
 					 if(xmlr.getLocalName().equals("link")) {
 						 for(int i = 0; i < xmlr.getAttributeCount(); i++) {
-							 if(xmlr.getAttributeLocalName(i).equals("link")) {
-								 link.add(xmlr.getAttributeValue(i));
-								 for(int j = 0; j < link.size(); j++) {
-									 System.out.println(link.get(j));
+							 if(xmlr.getAttributeLocalName(i).equals ("to")) {
+								 cittaperdute.get(n).getLink().add(Integer.decode(xmlr.getAttributeValue(i)));
+								 System.out.println(xmlr.getAttributeValue(i));
 								 }
 							 }
 						 }
-					 }
 					 
 					 /*System.out.println("Tag " + xmlr.getLocalName());
 					 for (int i = 0; i < xmlr.getAttributeCount(); i++)
@@ -79,8 +84,8 @@ public class LeggiCittaXml {
 					 //System.out.println("// commento " + xmlr.getText()); 
 					 break; // commento: ne stampa il contenuto
 				 case XMLStreamConstants.CHARACTERS: // content all’interno di un elemento: stampa il testo
-					 if (xmlr.getText().trim().length() > 0) // controlla se il testo non contiene solo spazi
-					 System.out.println("-> " + xmlr.getText());
+					// if (xmlr.getText().trim().length() > 0) // controlla se il testo non contiene solo spazi
+					 //System.out.println("-> " + xmlr.getText());
 				 break;
 			}
 			 xmlr.next();
