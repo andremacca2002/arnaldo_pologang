@@ -9,6 +9,8 @@ public class Citta {
 	int y;
 	int h;
 	ArrayList<Integer> link = new ArrayList<Integer>();
+	
+	
 	public Citta(String nome, int iD, int x, int y, int h, ArrayList<Integer> link) {
 		super();
 		this.nome = nome;
@@ -54,6 +56,19 @@ public class Citta {
 	public void setLink(ArrayList<Integer> link) {
 		this.link = link;
 	}
+
+	public String toString() {
+		String stringa = "Citta [nome=" + nome + ", ID=" + ID + ", x=" + x + ", y=" + y + ", h=" + h + ", link:\n]";
+		StringBuffer risultato = new StringBuffer();
+		risultato.append(stringa);
+		
+		for(int i = 0; i < link.size(); i++) {
+			risultato.append(link.get(i) + "\n");
+		}
+		
+		return risultato.toString();
+	}
+	
 	
 	
 }

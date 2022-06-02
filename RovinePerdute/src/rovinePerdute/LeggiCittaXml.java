@@ -8,14 +8,15 @@ import javax.xml.stream.*;
 public class LeggiCittaXml {
 	static ArrayList<String> codiciFiscali = new ArrayList<String>();
 	
-	public static void inizializzazione(String path) throws FactoryConfigurationError, XMLStreamException {
+	public static ArrayList<Citta> inizializzazione(String path) throws FactoryConfigurationError, XMLStreamException {
 		XMLInputFactory xmlif = null;
 		XMLStreamReader xmlr = null;
 		String nome = null;
-		String id = null;
-		String x = null;
-		String y = null;
-		String h = null;
+		int id = 0;
+		int x = 0;
+		int y = 0;
+		int h = 0;
+		ArrayList<Integer> link = new ArrayList<Integer>();
 		ArrayList<Citta> cittaperdute = new ArrayList<Citta>();
 		int n=0;
 		
@@ -35,31 +36,32 @@ public class LeggiCittaXml {
 				 case XMLStreamConstants.START_ELEMENT: // inizio di un elemento: stampa il nome del tag e i suoi attributi
 					 if(xmlr.getLocalName().equals("city")) {
 						 n++;
+						 
 						 for (int i = 0; i < xmlr.getAttributeCount(); i++) {
 							 if(xmlr.getAttributeLocalName(i).equals("id")) {
-								 id = xmlr.getAttributeValue(i);
-								 cittaperdute.get(n).setNome(nome);
-								 System.out.println(id);
+								 id = Integer.decode(xmlr.getAttributeValue(i)).intValue();
+								 //cittaperdute.get(n).setNome(nome);
+								 //System.out.println(id);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("name")) {
 								 nome = xmlr.getAttributeValue(i);
-								 cittaperdute.get(n).setNome(nome);
-								 System.out.println(nome);
+								 //cittaperdute.get(n).setNome(nome);
+								 //System.out.println(nome);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("x")) {
-								 x = xmlr.getAttributeValue(i);
-								 cittaperdute.get(n).setX(Integer.decode(xmlr.getAttributeValue(i)));
-								 System.out.println(x);
+								 x = Integer.decode(xmlr.getAttributeValue(i)).intValue();
+								 //cittaperdute.get(n).setX(Integer.decode(xmlr.getAttributeValue(i)));
+								// System.out.println(x);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("y")) {
-								 y = xmlr.getAttributeValue(i);
-								 cittaperdute.get(n).setY(Integer.decode(xmlr.getAttributeValue(i)));
-								 System.out.println(y);
+								 y = Integer.decode(xmlr.getAttributeValue(i)).intValue();
+								 //cittaperdute.get(n).setY(Integer.decode(xmlr.getAttributeValue(i)));
+								// System.out.println(y);
 							 }
 							 if(xmlr.getAttributeLocalName(i).equals("h")) {
-								 h = xmlr.getAttributeValue(i);
-								 cittaperdute.get(n).setH(Integer.decode(xmlr.getAttributeValue(i)));
-								 System.out.println(h);
+								 h = Integer.decode(xmlr.getAttributeValue(i)).intValue();
+								 //cittaperdute.get(n).setH(Integer.decode(xmlr.getAttributeValue(i)));
+								// System.out.println(h);
 							 }
 						 }
 					 }
@@ -67,8 +69,8 @@ public class LeggiCittaXml {
 					 if(xmlr.getLocalName().equals("link")) {
 						 for(int i = 0; i < xmlr.getAttributeCount(); i++) {
 							 if(xmlr.getAttributeLocalName(i).equals ("to")) {
-								 cittaperdute.get(n).getLink().add(Integer.decode(xmlr.getAttributeValue(i)));
-								 System.out.println(xmlr.getAttributeValue(i));
+								 link.add(Integer.decode(xmlr.getAttributeValue(i)));
+								// System.out.println(xmlr.getAttributeValue(i));
 								 }
 							 }
 						 }
@@ -78,6 +80,10 @@ public class LeggiCittaXml {
 						 System.out.printf(" => attributo %s->%s%n", xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));*/
 				 break;
 				 	case XMLStreamConstants.END_ELEMENT: // fine di un elemento: stampa il nome del tag chiuso
+				 		if(xmlr.getLocalName().equals("city")) {
+				 			cittaperdute.add(new Citta(nome, id, x, y, h, link));
+				 			link.clear();
+				 		}
 				 		//System.out.println("END-Tag " + xmlr.getLocalName()); 
 				 		break;
 				 case XMLStreamConstants.COMMENT:
@@ -90,6 +96,6 @@ public class LeggiCittaXml {
 			}
 			 xmlr.next();
 			}
-
+		return cittaperdute;
 	}
 }
