@@ -19,14 +19,14 @@ public class Main {
 			scelta = menu.scegli();
 			switch(scelta) {
 				case 1:
-					ArrayList<Citta> mappa0 = LeggiCittaXml.inizializzazione("PgAr_Map_5.xml");
+					ArrayList<Citta> mappa0 = LeggiCittaXml.inizializzazione("PgAr_Map_5.xml"); //lettura da xml
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa0);
 					distanzaT = String.valueOf(Percorso.getDistanza());
-					percOttimoM = metztli.calcolaPercorso(mappa0);
-					distanzaM = String.valueOf(Percorso.getDistanza());
-					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM);
+					percOttimoM = metztli.calcolaPercorso(mappa0); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 				
 				case 2:
@@ -34,29 +34,22 @@ public class Main {
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa1);
-					percOttimoM = metztli.calcolaPercorso(mappa1);
-					for(Citta cittaN : percOttimoT) {
-						System.out.println(cittaN.toString());
-					}
-					System.out.println("Metzili");
-					for(Citta cittaN : percOttimoM) {
-						System.out.println(cittaN.toString());
-					}
+					distanzaT = String.valueOf(Percorso.getDistanza());
+					percOttimoM = metztli.calcolaPercorso(mappa1); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
+					
 				
 				case 3:
 					ArrayList<Citta> mappa2 = LeggiCittaXml.inizializzazione("PgAr_Map_50.xml");
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa2);
-					percOttimoM = metztli.calcolaPercorso(mappa2);
-					for(Citta cittaN : percOttimoT) {
-						System.out.println(cittaN.toString());
-					}
-					System.out.println("Metzili");
-					for(Citta cittaN : percOttimoM) {
-						System.out.println(cittaN.toString());
-					}
+					distanzaT = String.valueOf(Percorso.getDistanza());
+					percOttimoM = metztli.calcolaPercorso(mappa2); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 
 				case 4:
@@ -64,14 +57,10 @@ public class Main {
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa3);
-					percOttimoM = metztli.calcolaPercorso(mappa3);
-					for(Citta cittaN : percOttimoT) {
-						System.out.println(cittaN.toString());
-					}
-					System.out.println("Metzili");
-					for(Citta cittaN : percOttimoM) {
-						System.out.println(cittaN.toString());
-					}
+					distanzaT = String.valueOf(Percorso.getDistanza());
+					percOttimoM = metztli.calcolaPercorso(mappa3); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 				
 				case 5:
@@ -79,14 +68,10 @@ public class Main {
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa4);
-					percOttimoM = metztli.calcolaPercorso(mappa4);
-					for(Citta cittaN : percOttimoT) {
-						System.out.println(cittaN.toString());
-					}
-					System.out.println("Metzili");
-					for(Citta cittaN : percOttimoM) {
-						System.out.println(cittaN.toString());
-					}
+					distanzaT = String.valueOf(Percorso.getDistanza());
+					percOttimoM = metztli.calcolaPercorso(mappa4); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 					
 				case 6:
@@ -94,14 +79,10 @@ public class Main {
 					metztli = new Metztli();
 					tonatiuh = new Tonatiuh();
 					percOttimoT = tonatiuh.calcolaPercorso(mappa5);
-					percOttimoM = metztli.calcolaPercorso(mappa5);
-					for(Citta cittaN : percOttimoT) {
-						System.out.println(cittaN.toString());
-					}
-					System.out.println("Metzili");
-					for(Citta cittaN : percOttimoM) {
-						System.out.println(cittaN.toString());
-					}
+					distanzaT = String.valueOf(Percorso.getDistanza());
+					percOttimoM = metztli.calcolaPercorso(mappa5); //percorso ottimale team matzli
+					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
+					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 				
 				case 7:
