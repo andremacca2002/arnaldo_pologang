@@ -23,7 +23,6 @@ public abstract class Percorso {
 			double min = 0;
 			for(int j = 0; j < mappa.get(i).link.size(); j++) {
 				if(!(ottimale.contains(mappa.get(mappa.get(i).link.get(j))))) {
-					
 					g = calcolaDistanza(mappa.get(i), mappa.get(mappa.get(i).link.get(j))) + distanza;
 					z = calcolaDistanza(mappa.get(mappa.size()-1), mappa.get(mappa.get(i).link.get(j)));
 					f = g + z;
@@ -31,7 +30,6 @@ public abstract class Percorso {
 					if(min == 0) {
 						min = f;
 						id = mappa.get(i).link.get(j);
-						
 					}
 					else if(f < min) {
 						min = f;
