@@ -58,7 +58,7 @@ public class Citta {
 	}
 
 	public String toString() {
-		String stringa = "Citta [nome=" + nome + ", ID=" + ID + ", x=" + x + ", y=" + y + ", h=" + h + ", link:\n]";
+		String stringa = "Città [nome= " + nome + ", ID= " + ID + ", x= " + x + ", y= " + y + ", h= " + h + "]\nlink:\n";
 		StringBuffer risultato = new StringBuffer();
 		risultato.append(stringa);
 		

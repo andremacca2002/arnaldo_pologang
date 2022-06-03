@@ -8,6 +8,7 @@ import javax.xml.stream.*;
 public class LeggiCittaXml {
 	static ArrayList<String> codiciFiscali = new ArrayList<String>();
 	
+	@SuppressWarnings("unchecked")
 	public static ArrayList<Citta> inizializzazione(String path) throws FactoryConfigurationError, XMLStreamException {
 		XMLInputFactory xmlif = null;
 		XMLStreamReader xmlr = null;
@@ -16,9 +17,9 @@ public class LeggiCittaXml {
 		int x = 0;
 		int y = 0;
 		int h = 0;
+		ArrayList<Integer> linkCitta = new ArrayList<Integer>();
 		ArrayList<Integer> link = new ArrayList<Integer>();
 		ArrayList<Citta> cittaperdute = new ArrayList<Citta>();
-		int n=0;
 		
 		try {
 		 xmlif = XMLInputFactory.newInstance();
@@ -34,9 +35,7 @@ public class LeggiCittaXml {
 					 //System.out.println("Start Read Doc " + path); 
 					 break;
 				 case XMLStreamConstants.START_ELEMENT: // inizio di un elemento: stampa il nome del tag e i suoi attributi
-					 if(xmlr.getLocalName().equals("city")) {
-						 n++;
-						 
+					 if(xmlr.getLocalName().equals("city")) {						 
 						 for (int i = 0; i < xmlr.getAttributeCount(); i++) {
 							 if(xmlr.getAttributeLocalName(i).equals("id")) {
 								 id = Integer.decode(xmlr.getAttributeValue(i)).intValue();
@@ -68,9 +67,8 @@ public class LeggiCittaXml {
 					 
 					 if(xmlr.getLocalName().equals("link")) {
 						 for(int i = 0; i < xmlr.getAttributeCount(); i++) {
-							 if(xmlr.getAttributeLocalName(i).equals ("to")) {
+							 if(xmlr.getAttributeLocalName(i).equals("to")) {
 								 link.add(Integer.decode(xmlr.getAttributeValue(i)));
-								// System.out.println(xmlr.getAttributeValue(i));
 								 }
 							 }
 						 }
@@ -81,7 +79,8 @@ public class LeggiCittaXml {
 				 break;
 				 	case XMLStreamConstants.END_ELEMENT: // fine di un elemento: stampa il nome del tag chiuso
 				 		if(xmlr.getLocalName().equals("city")) {
-				 			cittaperdute.add(new Citta(nome, id, x, y, h, link));
+				 			linkCitta = (ArrayList<Integer>) link.clone();
+				 			cittaperdute.add(new Citta(nome, id, x, y, h, linkCitta));
 				 			link.clear();
 				 		}
 				 		//System.out.println("END-Tag " + xmlr.getLocalName()); 
