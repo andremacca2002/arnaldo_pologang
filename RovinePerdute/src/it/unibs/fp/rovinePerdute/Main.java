@@ -42,47 +42,16 @@ public class Main {
 					
 				
 				case 3:
-					ArrayList<Citta> mappa2 = LeggiCittaXml.inizializzazione("PgAr_Map_50.xml");
-					metztli = new Metztli();
-					tonatiuh = new Tonatiuh();
-					percOttimoT = tonatiuh.calcolaPercorso(mappa2);
-					distanzaT = String.valueOf(Percorso.getDistanza());
-					percOttimoM = metztli.calcolaPercorso(mappa2); //percorso ottimale team matzli
-					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
-					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
-					break;
+				
 
 				case 4:
-					ArrayList<Citta> mappa3 = LeggiCittaXml.inizializzazione("PgAr_Map_200.xml");
-					metztli = new Metztli();
-					tonatiuh = new Tonatiuh();
-					percOttimoT = tonatiuh.calcolaPercorso(mappa3);
-					distanzaT = String.valueOf(Percorso.getDistanza());
-					percOttimoM = metztli.calcolaPercorso(mappa3); //percorso ottimale team matzli
-					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
-					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
-					break;
+				
 				
 				case 5:
-					ArrayList<Citta> mappa4 = LeggiCittaXml.inizializzazione("PgAr_Map_2000.xml");
-					metztli = new Metztli();
-					tonatiuh = new Tonatiuh();
-					percOttimoT = tonatiuh.calcolaPercorso(mappa4);
-					distanzaT = String.valueOf(Percorso.getDistanza());
-					percOttimoM = metztli.calcolaPercorso(mappa4); //percorso ottimale team matzli
-					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
-					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
+					
 					break;
 					
 				case 6:
-					ArrayList<Citta> mappa5 = LeggiCittaXml.inizializzazione("PgAr_Map_10000.xml");
-					metztli = new Metztli();
-					tonatiuh = new Tonatiuh();
-					percOttimoT = tonatiuh.calcolaPercorso(mappa5);
-					distanzaT = String.valueOf(Percorso.getDistanza());
-					percOttimoM = metztli.calcolaPercorso(mappa5); //percorso ottimale team matzli
-					distanzaM = String.valueOf(Percorso.getDistanza()); //distanza percorsa dal team matzli
-					ScriviPercorso.scrittura(percOttimoT, percOttimoM, distanzaT, distanzaM); //scrittura su xml
 					break;
 				
 				case 7:
