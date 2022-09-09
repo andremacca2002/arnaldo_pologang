@@ -1,7 +1,5 @@
 package it.unibs.fp.massaia;
 
-import java.util.ArrayList;
-
 import it.unibs.fp.mylib.InputDati;
 
 public class Ingrediente {

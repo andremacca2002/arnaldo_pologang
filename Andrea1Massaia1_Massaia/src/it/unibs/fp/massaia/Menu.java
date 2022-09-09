@@ -1,6 +1,6 @@
 package it.unibs.fp.massaia;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import it.unibs.fp.mylib.InputDati;
 
@@ -25,6 +25,7 @@ public class Menu {
 	}
 	
 	public static void creaMenu(ArrayList<Ricetta> ricette) {
+		Random random = new Random();
 		double calorieMenu = InputDati.leggiIntero("inserisci le calorie massime del menu");
 		ArrayList<Ricetta> ricetteprimi = new ArrayList<Ricetta>();
 		ArrayList<Ricetta> ricettesecondi = new ArrayList<Ricetta>();
@@ -33,20 +34,21 @@ public class Menu {
 			if(ricette.get(i).getClassificazione()==1) {
 				ricetteprimi.add(ricette.get(i));
 			}
-			if(ricette.get(i).getClassificazione()==2) {
+			else if(ricette.get(i).getClassificazione()==2) {
 				ricettesecondi.add(ricette.get(i));
 			}
 		}
 		boolean trovato=false;
 		do {
-		if(ricetteprimi.size()==0) {
-			System.out.println("nessuna combinazione possibile");
-			trovato=true;
-		}
+			if(ricetteprimi.size()==0) {
+				System.out.println("nessuna combinazione possibile");
+				trovato=true;
+			}
 		else {
-			int n=(int)Math.random()%ricetteprimi.size();
+			int n = random.nextInt(100) % ricetteprimi.size();
 			Ricetta piattoMenu=ricetteprimi.get(n);
 			ricetteprimi.remove(n);
+			
 			for(int i=0; i<ricettesecondi.size(); i++) {
 				if((piattoMenu.getCal()+ricettesecondi.get(i).getCal())<=calorieMenu) {
 					System.out.println("il menù è composto da: \nprimo piatto:\n"+piattoMenu.toString()+

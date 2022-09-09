@@ -45,6 +45,7 @@ public class Ricetta {
 	public double getCal() {
 		return cal;
 	}
+	
 	public static Ricetta creaRicetta(ArrayList<Ingrediente> ingredienti) {
 		boolean valido1=false;
 		String nomeRicetta;
@@ -56,11 +57,12 @@ public class Ricetta {
 		}while(!valido1);
 		
 		boolean valido2=false;
+		int classificazione;
 		
 		do {
-		int classificazione = InputDati.leggiIntero("primo o secondo piatto?");
-		if(classificazione<1 || classificazione>2)valido2=true;
-		else valido2=false;
+			classificazione = InputDati.leggiIntero("primo o secondo piatto?");
+			if(classificazione<1 || classificazione>2)valido2=true;
+			else valido2=false;
 		}while(valido2);
 		
 		ArrayList<Ingrediente> ingredientiR= new ArrayList<Ingrediente>();
@@ -71,21 +73,32 @@ public class Ricetta {
 		boolean valido=false;
 		do {
 			int numIngrediente = InputDati.leggiIntero("quale ingrediente vuoi usare?");
-			if(numIngrediente>=ingredienti.size()) {
+			if((numIngrediente-1)>=ingredienti.size()) {
+				System.out.println("Ingrediente non presente.");
 			}
 			else if(!(numIngrediente==0)) {
 				Ingrediente ingredienteN=ingredienti.get(numIngrediente-1);
 				ingredienteN.setQuantità(InputDati.leggiIntero("quanti ettogrammi?"));
 				ingredientiR.add(ingredienteN);
 			}
-			else if(ingredientiR.size()>0){
+			else if(ingredientiR.size()==0){
 				System.out.println("inserisci almeno un ingrediente");
 			}
 			else {
 				valido=true;
 			}
 		}while(!valido);
-		String descrizione = InputDati.leggiStringaNonVuota("inserisci una descrizione della ricetta");
+		
+		valido1 = false;
+		String descrizione;
+		
+		do {
+			descrizione = InputDati.leggiStringaNonVuota("inserisci una descrizione della ricetta: ");
+			if (!(descrizione.matches("-?\\d+"))) { //verifica sia un numero 
+				valido1=true;
+			}
+		}while(!valido1);
+		
 		Ricetta ricettaN= new Ricetta(ingredientiR, nomeRicetta, descrizione, classificazione);
 		ricettaN.setCal();
 		return ricettaN;	

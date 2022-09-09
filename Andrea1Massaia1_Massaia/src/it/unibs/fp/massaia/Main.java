@@ -1,11 +1,7 @@
 package it.unibs.fp.massaia;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-
-import it.unibs.fp.mylib.InputDati;
-import it.unibs.fp.mylib.MyMenu;
+import java.util.*;
+import it.unibs.fp.mylib.*;
 
 
 public class Main {
