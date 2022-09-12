@@ -5,6 +5,7 @@ import java.util.*;
 import it.unibs.fp.mylib.InputDati;
 
 public class Menu {
+	
 	private Ricetta primoPiatto;
 	private Ricetta secondoPiatto; 
 	private double calorie;
@@ -26,7 +27,7 @@ public class Menu {
 	
 	public static void creaMenu(ArrayList<Ricetta> ricette) {
 		Random random = new Random();
-		double calorieMenu = InputDati.leggiIntero("inserisci le calorie massime del menu");
+		double calorieMenu = InputDati.leggiIntero(STR.INSERISCI_CALORIE_MAX);
 		ArrayList<Ricetta> ricetteprimi = new ArrayList<Ricetta>();
 		ArrayList<Ricetta> ricettesecondi = new ArrayList<Ricetta>();
 		
@@ -41,7 +42,7 @@ public class Menu {
 		boolean trovato=false;
 		do {
 			if(ricetteprimi.size()==0) {
-				System.out.println("nessuna combinazione possibile");
+				System.out.println(STR.MSG_NO_COMBINATION);
 				trovato=true;
 			}
 		else {
@@ -51,8 +52,8 @@ public class Menu {
 			
 			for(int i=0; i<ricettesecondi.size(); i++) {
 				if((piattoMenu.getCal()+ricettesecondi.get(i).getCal())<=calorieMenu) {
-					System.out.println("il menù è composto da: \nprimo piatto:\n"+piattoMenu.toString()+
-							"\nsecondopiatto:\n "+ ricettesecondi.get(i).toString());
+					System.out.println(STR.MSG_COMPOSIZIONE_MENU + piattoMenu.toString()+
+							STR.MSG_SECONDOPIATTO + ricettesecondi.get(i).toString());
 					trovato=true;
 					}
 			if(trovato)break;

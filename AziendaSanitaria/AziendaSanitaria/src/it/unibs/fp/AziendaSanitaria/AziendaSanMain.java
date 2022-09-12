@@ -11,14 +11,9 @@ public class AziendaSanMain {
 	public static void main(String[] args) {
 		ArrayList<Medico> medici = new ArrayList<Medico>();
 		ArrayList<Paziente> pazienti = new ArrayList<Paziente>();
-		
-		String nomeAzienda = InputDati.leggiStringaNonVuota("Inserisci nome azienda: ");
-		String descrizione = InputDati.leggiStringaNonVuota("Inserisci breve descrizione dell'azienda: ");
-		
-		AziendaSanitaria azienda = new AziendaSanitaria(nomeAzienda, descrizione, medici, pazienti);
+		AziendaSanitaria azienda = AziendaSanitaria.creaAzienda(medici, pazienti);
 		
 		MyMenu menu = new MyMenu(TITOLO, VOCI);
-		
 		int scelta;
 		do {
 			scelta = menu.scegli();
@@ -31,7 +26,7 @@ public class AziendaSanMain {
 					System.out.println("E' necessario aggiungere dei medici.");
 				}
 				else {
-					pazienti.add(azienda.inserimentoPaziente(medici));
+					pazienti.add(azienda.inserimentoPaziente(medici, pazienti));
 				}
 				break;
 			case 3:

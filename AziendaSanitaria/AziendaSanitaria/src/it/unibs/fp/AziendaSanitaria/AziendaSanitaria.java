@@ -42,11 +42,18 @@ public class AziendaSanitaria {
 		return descrizione;
 	}
 	
-	public Medico inserimentoMedico() {
-		String nomeMedico = InputDati.leggiStringaNonVuota("Inserisci nome medico: ");
-		String cognomeMedico = InputDati.leggiStringaNonVuota("Inserisci cognome medico: ");
-		boolean valido = false;
+	public static AziendaSanitaria creaAzienda(ArrayList<Medico> medici, ArrayList<Paziente> pazienti ) {
+		String nomeAzienda = InputDati.leggiStringaNonVuotaAlfanumerica("Inserisci nome azienda: ");
+		String descrizione = InputDati.leggiStringaNonVuotaAlfanumerica("Inserisci breve descrizione dell'azienda: ");
 		
+		AziendaSanitaria azienda = new AziendaSanitaria(nomeAzienda, descrizione, medici, pazienti);
+		return azienda;
+	}
+	
+	public Medico inserimentoMedico() {
+		String nomeMedico = InputDati.leggiStringaNonVuotadilettere("Inserisci nome medico: ");
+		String cognomeMedico = InputDati.leggiStringaNonVuotadilettere("Inserisci cognome medico: ");
+		boolean valido = false;
 		String codice;
 		do {
 			codice = InputDati.leggiStringaNonVuota("Inserisci codice medico: ");
@@ -93,14 +100,13 @@ public class AziendaSanitaria {
 		return new Medico(codice, nomeMedico, cognomeMedico, giorno);
 	}
 	
-	public Paziente inserimentoPaziente(ArrayList<Medico> medici) {
+	public Paziente inserimentoPaziente(ArrayList<Medico> medici, ArrayList<Paziente>pazienti) {
 
-		Random random = new Random();
+		
 		boolean valido = false;
 		String tesseraSanitaria;
 		do {
-			tesseraSanitaria = InputDati.leggiStringaNonVuota("Inserisci codice tessera sanitaria: ");
-			
+			tesseraSanitaria = InputDati.leggiStringaNonVuotaAlfanumerica("Inserisci codice tessera sanitaria: ");
 			for(int i = 0; i < listaPaziente.size(); i++) {
 				if(listaPaziente.size() == 0);
 				else if(listaPaziente.get(i).getTesseraSanitaria().equals(tesseraSanitaria)) {
@@ -113,12 +119,17 @@ public class AziendaSanitaria {
 			}
 		}while(valido);
 		
-		String nomePaziente = InputDati.leggiStringaNonVuota("Inserire nome paziente: ");
-		String cognomePaziente = InputDati.leggiStringaNonVuota("Inserire cognome paziente: ");
+		String nomePaziente = InputDati.leggiStringaNonVuotadilettere("Inserire nome paziente: ");
+		String cognomePaziente = InputDati.leggiStringaNonVuotadilettere("Inserire cognome paziente: ");
+		System.out.println("Seleziona il medico disponibile: ");
 		
-		int num = random.nextInt(1000) % medici.size();
-		
-		String codiceMedico = medici.get(num).getCodice();
+		for(int i = 0; i < medici.size(); i++) {
+				System.out.println((i+1) + ". " + medici.get(i).toString());
+			}
+		int num;
+		num = InputDati.leggiIntero("-> ", 1, medici.size());
+			
+		String codiceMedico = medici.get(num-1).getCodice();
 		
 		return new Paziente(tesseraSanitaria, nomePaziente, cognomePaziente, codiceMedico);
 	}
@@ -182,22 +193,23 @@ public class AziendaSanitaria {
 	}
 
 	public void ricercaPaziente(ArrayList<Paziente> pazienti, ArrayList<Medico> medici, String codiceSanitario) {
-		for(int i = 0; i < pazienti.size(); i++) {
-			if(pazienti.get(i).getTesseraSanitaria().equals(codiceSanitario)) {
-				for(int j = 0; j < medici.size(); j++) {
-					if(medici.get(j).getCodice().equals(pazienti.get(i).getMedico())) {
-						System.out.println("Il paziente ricercato è " + pazienti.get(i).getNome() + " " + 
-											pazienti.get(i).getCognome() + ", il suo medico associato è " + 
-											medici.get(j).getNome() + " " + medici.get(j).getCognome());
-					}
-					else {
-						System.out.println("Non è stato trovato nessun paziente.");
-					}
+		if(pazienti.size()==0)System.out.println("è necessario inserire prima almeno un paziente\n ");
+		else {
+			for(int i = 0; i < pazienti.size(); i++) {
+				if(pazienti.get(i).getTesseraSanitaria().equals(codiceSanitario)) {
+					for(int j = 0; j < medici.size(); j++) {
+						if(medici.get(j).getCodice().equals(pazienti.get(i).getMedico())) {
+							System.out.println("Il paziente ricercato è " + pazienti.get(i).getNome() + " " + 
+												pazienti.get(i).getCognome() + ", il suo medico associato è " + 
+												medici.get(j).getNome() + " " + medici.get(j).getCognome());
+						}
+						
+						}
+					}else System.out.println("Non è stato trovato nessun paziente.");
 				}
-			}
-			
-		}
+		}	
 	}
+
 	
 	public void riassegnamentoPazienteMedico(ArrayList<Paziente> pazienti, ArrayList<Medico> medici) {
 		for(int j = 0; j < pazienti.size(); j++) {
@@ -209,7 +221,7 @@ public class AziendaSanitaria {
 		System.out.println("Seleziona il medico disponibile: ");
 		int x = 0;
 		for(int i = 0; i < medici.size(); i++) {
-			if(!(pazienti.get(paziente).getMedico().equals(medici.get(i).getCodice()))) {
+			if(!(pazienti.get(paziente-1).getMedico().equals(medici.get(i).getCodice()))) {
 				System.out.println((i+1) + ". " + medici.get(i).toString());
 			}
 			else {
@@ -223,7 +235,7 @@ public class AziendaSanitaria {
 		do {
 			medico = InputDati.leggiIntero("-> ", 1, medici.size());
 			
-			if(medico == x) {
+			if((medico-1) == x) {
 				System.out.println("Selezione errata.");
 				valido = true;
 			}
@@ -232,8 +244,8 @@ public class AziendaSanitaria {
 			}
 		}while(valido);
 		
-		pazienti.get(paziente).setMedico(medici.get(medico-1).getCodice());
+		pazienti.get(paziente-1).setMedico(medici.get(medico-1).getCodice());
 		
-		System.out.println(pazienti.get(paziente).toString());
+		System.out.println(pazienti.get(paziente-1).toString());
 	}
 }

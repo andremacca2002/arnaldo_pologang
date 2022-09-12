@@ -47,20 +47,15 @@ public class Ricetta {
 	}
 	
 	public static Ricetta creaRicetta(ArrayList<Ingrediente> ingredienti) {
-		boolean valido1=false;
+		boolean valido1;
 		String nomeRicetta;
-		do {
-		nomeRicetta = InputDati.leggiStringaNonVuota("come si chima la ricetta");
-			if (!(nomeRicetta.matches("-?\\d+"))) { //verifica sia un numero 
-				valido1=true;
-			}
-		}while(!valido1);
+		nomeRicetta = InputDati.leggiStringaNonVuotadilettere(STR.MSG_NOME_RICETTA);
 		
 		boolean valido2=false;
 		int classificazione;
 		
 		do {
-			classificazione = InputDati.leggiIntero("primo o secondo piatto?");
+			classificazione = InputDati.leggiIntero(STR.MSG_PRIMO_O_SECONDO);
 			if(classificazione<1 || classificazione>2)valido2=true;
 			else valido2=false;
 		}while(valido2);
@@ -72,17 +67,17 @@ public class Ricetta {
 		}
 		boolean valido=false;
 		do {
-			int numIngrediente = InputDati.leggiIntero("quale ingrediente vuoi usare?");
+			int numIngrediente = InputDati.leggiIntero(STR.MSG_QUALE_INGREDIENTE);
 			if((numIngrediente-1)>=ingredienti.size()) {
-				System.out.println("Ingrediente non presente.");
+				System.out.println(STR.MSG_INGREDIENTE_NON_PRESENTE);
 			}
 			else if(!(numIngrediente==0)) {
 				Ingrediente ingredienteN=ingredienti.get(numIngrediente-1);
-				ingredienteN.setQuantità(InputDati.leggiIntero("quanti ettogrammi?"));
+				ingredienteN.setQuantità(InputDati.leggiIntero(STR.MSG_QUANTI_ETTOGRAMMI));
 				ingredientiR.add(ingredienteN);
 			}
 			else if(ingredientiR.size()==0){
-				System.out.println("inserisci almeno un ingrediente");
+				System.out.println(STR.MSG_ALMENO_UN_INGREDIENTE);
 			}
 			else {
 				valido=true;
@@ -93,7 +88,7 @@ public class Ricetta {
 		String descrizione;
 		
 		do {
-			descrizione = InputDati.leggiStringaNonVuota("inserisci una descrizione della ricetta: ");
+			descrizione = InputDati.leggiStringaNonVuotaAlfanumerica(STR.INSERISCI_DESCRIZIONE_RICETTA);
 			if (!(descrizione.matches("-?\\d+"))) { //verifica sia un numero 
 				valido1=true;
 			}

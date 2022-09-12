@@ -16,11 +16,17 @@ public class Medico {
 	public String getCodice() {
 		return codice;
 	}
-
+	/**
+	 * 
+	 * @param codice
+	 */
 	public void setCodice(String codice) {
 		this.codice = codice;
 	}
-
+	/**
+	 * 
+	 * @return nome del medico 
+	 */
 	public String getNome() {
 		return nome;
 	}
@@ -38,7 +44,7 @@ public class Medico {
 	}
 
 	public String toString() {
-		return "Medico:" + nome + " " + cognome + ", codice: " + codice + ", giorno libero:" + giornoLibero;
+		return "Medico: " + nome + " " + cognome + ", codice: " + codice + ", giorno libero: " + giornoLibero;
 	}
 	
 	

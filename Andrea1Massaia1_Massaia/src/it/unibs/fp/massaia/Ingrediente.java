@@ -48,17 +48,17 @@ public class Ingrediente {
 	}
 	public static Ingrediente creaIngrediente() {
 	String nomeIngrediente;
-	boolean valido1=false;
+	boolean valido1;
 	do {
-		nomeIngrediente = InputDati.leggiStringaNonVuota("come si chima l'ingrediente");
-		if (!(nomeIngrediente.matches("-?\\d+"))) {
-			valido1=true;
-		}
-	}while(!valido1);
-    int calorie = InputDati.leggiIntero("quante calorie per ettogrammo?");
+		valido1=true;
+		nomeIngrediente = InputDati.leggiStringaNonVuota(STR.MSG_INSERISCI_NOME_INGREDIENTE);
+		for (int i = 0; i < nomeIngrediente.length(); i++)
+          {
+            char c = nomeIngrediente.charAt(i);
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) valido1=false;
+            }
+		}while(!valido1);
+    int calorie = InputDati.leggiIntero(STR.MSG_QUANTE_CALORIE_PER_ETT);
     return new Ingrediente(nomeIngrediente, calorie);
 	}
-	
-
-
 }
