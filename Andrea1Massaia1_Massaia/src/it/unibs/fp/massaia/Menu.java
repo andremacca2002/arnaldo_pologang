@@ -20,10 +20,6 @@ public class Menu {
 		return calorie;
 	}
 
-	@Override
-	public String toString() {
-		return "Menu [primoPiatto=" + primoPiatto + ", secondoPiatto=" + secondoPiatto + ", calorie=" + calorie + "]";
-	}
 	
 	public static void creaMenu(ArrayList<Ricetta> ricette) {
 		Random random = new Random();
@@ -62,4 +58,15 @@ public class Menu {
 		}while(!trovato);
 	}
 
+	
+	@Override
+	public String toString() {
+		StringBuffer descrizione1 = new StringBuffer(); 
+		descrizione1.append(STR.MSG_MENU_COMPOSTO_DA);
+		descrizione1.append(STR.MSG_PRIMO_PIATTO + primoPiatto);
+		descrizione1.append(STR.MSG_SECONDO_PIATTO + secondoPiatto);
+		descrizione1.append(STR.MSG_CAL + calorie);
+		return descrizione1.toString();
+	}
 }
+

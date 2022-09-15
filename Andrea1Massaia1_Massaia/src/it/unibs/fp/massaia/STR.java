@@ -15,14 +15,22 @@ public class STR {
 	public static final String MSG_COMPOSIZIONE_MENU = "il menù è composto da: \nprimo piatto:\n";
 	public static final String MSG_NO_COMBINATION = "nessuna combinazione possibile";
 	public static final String INSERISCI_CALORIE_MAX = "inserisci le calorie massime del menu";
+	public static final String MSG_SECONDO_PIATTO = " secondoPiatto=";
+	public static final String MSG_PRIMO_PIATTO = "primoPiatto=";
+	public static final String MSG_MENU_COMPOSTO_DA = "il menu è composto da:";
 	//RICETTA
 	public static final String MSG_NOME_RICETTA = "come si chima la ricetta";
 	public static final String MSG_PRIMO_O_SECONDO = "primo o secondo piatto?";
-	public static final String MSG_QUALE_INGREDIENTE = "quale ingrediente vuoi usare?";
+	public static final String MSG_QUALE_INGREDIENTE = "quale ingrediente vuoi usare(0 per uscire)?";
 	public static final String MSG_INGREDIENTE_NON_PRESENTE = "Ingrediente non presente.";
 	public static final String MSG_QUANTI_ETTOGRAMMI = "quanti ettogrammi?";
 	public static final String MSG_ALMENO_UN_INGREDIENTE = "inserisci almeno un ingrediente";
 	public static final String INSERISCI_DESCRIZIONE_RICETTA = "inserisci una descrizione della ricetta: ";
+	public static final String MSG_INGREDIENTI = "\n ingredieti presenti=\n";
+	public static final String MSG_CAL = "\n cal=";
+	public static final String MSG_CLASSIFICAZIONE = "\n classificazione=";
+	public static final String MSG_DESCRIZIONE = "\n descrizione=";
+	public static final String MSG_NOME = "\n nome=";
 	//INGREDIENTE
 	public static final String MSG_QUANTE_CALORIE_PER_ETT = "quante calorie per ettogrammo?";
 	public static final String MSG_INSERISCI_NOME_INGREDIENTE = "come si chima l'ingrediente";

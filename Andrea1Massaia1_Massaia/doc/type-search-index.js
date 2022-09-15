@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"it.unibs.fp.massaia","l":"Ingrediente"}];updateSearchResults();

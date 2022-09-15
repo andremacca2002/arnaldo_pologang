@@ -5,7 +5,7 @@ import java.util.*;
 import it.unibs.fp.mylib.InputDati;
 
 public class Ricetta {
-
+	private static final String MGS_ELENCO_INGREDIENTI = "elenco degli ingredienti disponibili: ";
 	private ArrayList<Ingrediente> ingredieti;
 	private String nome;
 	private String descrizione;
@@ -28,12 +28,7 @@ public class Ricetta {
 		return cal;
 		
 	}
-	@Override
-	public String toString() {
-		return "\n nome=" + nome + "\n descrizione=" + descrizione
-				+ "\n classificazione=" + classificazione + "\n cal=" + cal + "\n ingredieti presenti=\n" + ingredieti;
-		
-	}
+	
 	public int getClassificazione() {
 		return classificazione;
 		
@@ -47,9 +42,8 @@ public class Ricetta {
 	}
 	
 	public static Ricetta creaRicetta(ArrayList<Ingrediente> ingredienti) {
-		boolean valido1;
 		String nomeRicetta;
-		nomeRicetta = InputDati.leggiStringaNonVuotadilettere(STR.MSG_NOME_RICETTA);
+		nomeRicetta = InputDati.leggiStringaNonVuotaAlfanumerica(STR.MSG_NOME_RICETTA);
 		
 		boolean valido2=false;
 		int classificazione;
@@ -61,9 +55,9 @@ public class Ricetta {
 		}while(valido2);
 		
 		ArrayList<Ingrediente> ingredientiR= new ArrayList<Ingrediente>();
-		
+		System.out.println(MGS_ELENCO_INGREDIENTI);
 		for(int i=0; i<ingredienti.size(); i++) {
-			System.out.println((i+1)+ingredienti.get(i).toString());
+			System.out.println("->" + (i+1) + ": " + ingredienti.get(i).toString());
 		}
 		boolean valido=false;
 		do {
@@ -83,19 +77,21 @@ public class Ricetta {
 				valido=true;
 			}
 		}while(!valido);
-		
-		valido1 = false;
-		String descrizione;
-		
-		do {
-			descrizione = InputDati.leggiStringaNonVuotaAlfanumerica(STR.INSERISCI_DESCRIZIONE_RICETTA);
-			if (!(descrizione.matches("-?\\d+"))) { //verifica sia un numero 
-				valido1=true;
-			}
-		}while(!valido1);
-		
+	
+		String descrizione = InputDati.leggiStringaNonVuotaAlfanumerica(STR.INSERISCI_DESCRIZIONE_RICETTA);
 		Ricetta ricettaN= new Ricetta(ingredientiR, nomeRicetta, descrizione, classificazione);
 		ricettaN.setCal();
 		return ricettaN;	
+	}
+	
+@Override
+	public String toString() {
+		StringBuffer descrizione1 = new StringBuffer(); 
+		descrizione1.append(STR.MSG_NOME + nome);
+		descrizione1.append(STR.MSG_DESCRIZIONE + descrizione);
+		descrizione1.append(STR.MSG_CLASSIFICAZIONE + classificazione);
+		descrizione1.append(STR.MSG_CAL + cal);
+		descrizione1.append(STR.MSG_INGREDIENTI + ingredieti);
+		return descrizione1.toString();
 	}
 }
